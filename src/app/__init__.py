@@ -1,19 +1,14 @@
 # using this tutorial https://www.eliasbrange.dev/posts/deploy-fastapi-on-aws-part-1-lambda-api-gateway/
 
 '''
-
-To build:
-
-Delete the docker images then,
-
-# because we have C dependencies
-sam build --user-container
-
 To test:
-sam local start-api --force-build-image --debug
+aws sso login
+sam local start-api --debug
 
-To deploy:
+# Rebuild, every time code changes with, because we have C dependencies:
+sam build --use-container
 
+To deploy/update:
 sam deploy \
     --stack-name BusObservatoryAPI \
     --s3-bucket busobservatory-api \
@@ -48,7 +43,7 @@ def query_job(system_id, route, start, end):
         AND
         (timestamp >= from_iso8601_timestamp('{start}') AND timestamp < from_iso8601_timestamp('{end}'))
         """  
-    # print(query_String)
+    print(query_String)
     dataframe, _ = athena_client.execute(query=query_String)
     #FIXME: format the return properly
     return{
@@ -83,9 +78,6 @@ async def fetch_buses_by_path(
     #TODO: auth0 integration using 'apikey'
     # https://auth0.com/blog/build-and-secure-fastapi-server-with-auth0/
     
-    ## debugging output
-    # return json_response of run_query(system_id, route, year, month, day, hour)
-
     # live db query
     return {
             "query": 
@@ -105,8 +97,8 @@ async def fetch_buses_by_path(
 ########################################################################################################
 # Unlimited data by query arguments
 # https://fastapi.tiangolo.com/tutorial/query-params/
-# test locally with
-# TODO:
+# test locally with http://127.0.0.1:3000/buses/byquery/?system_id="nyct_mta_bus_siri"&route="M1"&start="2022-07-07T01:00:00"
+# TODO: 
 ########################################################################################################
 @app.get("/buses/byquery/")
 async def fetch_buses_by_query(
@@ -120,9 +112,8 @@ async def fetch_buses_by_query(
     #TODO: auth0 integration using 'apikey'
     # https://auth0.com/blog/build-and-secure-fastapi-server-with-auth0/
     
-    ## debugging output
-    # return {"system_id": system_id, "route": route, "start":start, "end":end, "apikey":apikey}
-
+    #TODO: limit size of request by trimming period to 1 hour?
+    
     # live db query
     return {
             "query": 
@@ -137,6 +128,6 @@ async def fetch_buses_by_query(
 
 @app.get("/")
 async def get_root():
-    return {"message": "FastAPI chicken sandwich running in a Lambda function"}
+    return {"message": "FastAPI turkey sandwich running in a Lambda function"}
  
 handler = Mangum(app)
