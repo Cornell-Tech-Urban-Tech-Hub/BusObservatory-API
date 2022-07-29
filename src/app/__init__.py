@@ -1,39 +1,31 @@
+#FastAPI Lambda API Handler
 # using this tutorial https://www.eliasbrange.dev/posts/deploy-fastapi-on-aws-part-1-lambda-api-gateway/
-
-'''
-To test:
-aws sso login
-sam local start-api --debug
-
-# Rebuild, every time code changes with, because we have C dependencies:
-sam build --use-container
-
-To deploy/update:
-sam deploy \
-    --stack-name BusObservatoryAPI \
-    --s3-bucket busobservatory-api \
-    --capabilities CAPABILITY_IAM
-'''
     
 from fastapi import FastAPI, Path
 from mangum import Mangum
-import os
 import datetime as dt
 import pythena
- 
-# app = FastAPI()
+from starlette.responses import Response
+import typing
+import json
 
-#FIXME: "openapi_prefix" has been deprecated in favor of "root_path", which follows more closely the ASGI standard, is simpler, and more automatic. 
-#FIXME: Check the docs at https://fastapi.tiangolo.com/advanced/sub-applications/
-# fix path for auto-gen docs on Lambda
-# from https://adem.sh/blog/tutorial-fastapi-aws-lambda-serverless
-stage = os.environ.get('STAGE', None)
-openapi_prefix = f"/{stage}" if stage else "/"
-app = FastAPI(title="BusObservatoryAPI", openapi_prefix=openapi_prefix)
+#root_path fix for docs/redoc endpoints
+app = FastAPI(title="BusObservatoryAPI",root_path="/")
+class PrettyJSONResponse(Response):
+    media_type = "application/json"
+
+    def render(self, content: typing.Any) -> bytes:
+        return json.dumps(
+            content,
+            ensure_ascii=False,
+            allow_nan=False,
+            indent=4,
+            separators=(", ", ": "),
+        ).encode("utf-8")
 
 def query_job(system_id, route, start, end): 
     athena_client = pythena.Athena(database="busobservatory")
-    # use single quotes in these queries otherwise Athena chokes
+    # n.b. use single quotes in these queries otherwise Athena chokes
     query_String=   \
         f"""
         SELECT *
@@ -45,18 +37,31 @@ def query_job(system_id, route, start, end):
         """  
     print(query_String)
     dataframe, _ = athena_client.execute(query=query_String)
-    #FIXME: format the return properly
-    return{
-        "Table Records": dataframe.to_json()
-    }
+    # n.b. JSON serializer doesn't like NaNs
+    return dataframe.fillna('').to_dict(orient='records')
 
-########################################################################################################
-# One route-hour by path arguments
-# https://fastapi.tiangolo.com/tutorial/path-params/
-# test locally http://127.0.0.1:3000/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4/sfsafasfasf
-# test deployed with https://u8lmx5wj3g.execute-api.us-east-1.amazonaws.com/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4/sfsafasfasf
-########################################################################################################
-@app.get("/buses/bypath/{system_id}/{route}/{year}/{month}/{day}/{hour}/{apikey}")
+def response_packager(response, system_id, route, start, end, apikey):
+    return {
+        "query": 
+                {
+                    "system_id": system_id,
+                    "route": route,
+                    "start (gte)":start,
+                    "end (lt)":end,
+                    "apikey": apikey
+                }, 
+        "result":response
+        }
+
+
+#######################################################################
+# by path arguments (one route-hour)
+#######################################################################
+
+#TODO: auth0 integration using 'apikey' https://auth0.com/blog/build-and-secure-fastapi-server-with-auth0/
+
+@app.get("/buses/bypath/{system_id}/{route}/{year}/{month}/{day}/{hour}/{apikey}", 
+         response_class=PrettyJSONResponse)
 async def fetch_buses_by_path(
     system_id: str, 
     route: str, 
@@ -74,60 +79,53 @@ async def fetch_buses_by_path(
         end = dt.datetime(year,month,day+1,0,0,0).isoformat()
     elif hour < 23:
         end = dt.datetime(year,month,day,(hour+1),0,0).isoformat()
-    
-    #TODO: auth0 integration using 'apikey'
-    # https://auth0.com/blog/build-and-secure-fastapi-server-with-auth0/
-    
-    # live db query
-    return {
-            "query": 
-                    {
-                        "system_id": system_id,
-                        "year":year,
-                        "month":month,
-                        "day":day,
-                        "hour":hour,
-                        "start (derived, inclusive)":start,
-                        "end (derived, not inclusive)":end,
-                        "apikey": apikey
-                    }, 
-            "result":query_job(system_id, route, start, end)
-            }
 
-########################################################################################################
-# Unlimited data by query arguments
-# https://fastapi.tiangolo.com/tutorial/query-params/
-# test locally with http://127.0.0.1:3000/buses/byquery/?system_id="nyct_mta_bus_siri"&route="M1"&start="2022-07-07T01:00:00"
-# TODO: 
-########################################################################################################
-@app.get("/buses/byquery/")
+    return response_packager(query_job(system_id, route, start, end),
+                             system_id, 
+                             route, 
+                             start,
+                             end, 
+                             apikey)
+
+
+#######################################################################
+# by query arguments (currently no limit on period)
+#######################################################################
+
+#TODO: abstract out query args into the query path, so we can use across data sources, e.g. (e.g. 'rt' for nj, GTFSRT "vehicle.trip.route_id","vehicle.timestamp" )
+#TODO: validation for start, end
+#TODO: limit size of request by trimming period to 1 hour?
+#TODO: auth0 integration using 'apikey' https://auth0.com/blog/build-and-secure-fastapi-server-with-auth0/
+
+@app.get("/buses/byquery/",
+         response_class=PrettyJSONResponse)
 async def fetch_buses_by_query(
     system_id: str, 
     route: str, 
-    apikey:str, #TODO: better validation
-    start: str, #TODO: better validation
-    end:str #TODO: better validation
+    apikey:str,
+    start: str, 
+    end:str 
     ):
-       
-    #TODO: auth0 integration using 'apikey'
-    # https://auth0.com/blog/build-and-secure-fastapi-server-with-auth0/
     
-    #TODO: limit size of request by trimming period to 1 hour?
+    # # live db query
+    # return {
+    #         "query": 
+    #                 {
+    #                     "system_id": system_id,
+    #                     "route": route,
+    #                     "start (inclusive)":start,
+    #                     "end (not inclusive)":end,
+    #                     "apikey": apikey
+    #                 }, 
+    #         "result":query_job(system_id, route, start, end)
+    #         }
     
-    # live db query
-    return {
-            "query": 
-                    {
-                        "system_id": system_id,
-                        "start (inclusive)":start,
-                        "end (not inclusive)":end,
-                        "apikey": apikey
-                    }, 
-            "result":query_job(system_id, route, start, end)
-            }
+    return response_packager(query_job(system_id, route, start, end),
+                            system_id, 
+                            route, 
+                            start,
+                            end, 
+                            apikey)
 
-@app.get("/")
-async def get_root():
-    return {"message": "FastAPI turkey sandwich running in a Lambda function"}
- 
+
 handler = Mangum(app)
