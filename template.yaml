@@ -1,12 +1,16 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: FastAPI on Lambda Tutorial
+Description: API handler for api.buswatcher.org
  
 Resources:
   Function:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: src
+      Policies:
+        - AWSGlueConsoleFullAccess
+        - AmazonAthenaFullAccess
+        - AmazonS3FullAccess
       Handler: app.handler
       Runtime: python3.9
       Timeout: 600

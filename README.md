@@ -28,8 +28,13 @@ deployed
 ### To deploy/update:
 
 ```
+sam build --use-container &&
 sam deploy \
     --stack-name BusObservatoryAPI \
     --s3-bucket busobservatory-api \
     --capabilities CAPABILITY_IAM
 ```
+
+### Notes
+
+1. Adding permissions to SAM role https://aws.amazon.com/premiumsupport/knowledge-center/lambda-sam-template-permissions/
