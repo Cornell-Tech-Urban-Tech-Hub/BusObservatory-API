@@ -1,3 +1,5 @@
 fastapi
 mangum
 pythena
+jinja2
+Markdown

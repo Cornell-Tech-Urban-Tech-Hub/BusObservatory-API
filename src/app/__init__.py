@@ -1,7 +1,7 @@
 #FastAPI Lambda API Handler
 # using this tutorial https://www.eliasbrange.dev/posts/deploy-fastapi-on-aws-part-1-lambda-api-gateway/
     
-from fastapi import FastAPI, Path
+from fastapi import FastAPI, Path, Request
 from mangum import Mangum
 import datetime as dt
 import pythena
@@ -9,8 +9,23 @@ from starlette.responses import Response
 import typing
 import json
 
+
+
 #root_path fix for docs/redoc endpoints
 app = FastAPI(title="BusObservatoryAPI",root_path="/")
+
+# for home page
+# using this tutorial https://levelup.gitconnected.com/building-a-website-starter-with-fastapi-92d077092864
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
+from .library.helpers import *
+
+#######################################################################
+# helpers
+#######################################################################
 class PrettyJSONResponse(Response):
     media_type = "application/json"
 
@@ -53,6 +68,15 @@ def response_packager(response, system_id, route, start, end, apikey):
         "result":response
         }
 
+
+#######################################################################
+# home page
+#######################################################################
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    data = openfile("home.md")
+    return templates.TemplateResponse("page.html", {"request": request, "data": data})
+    
 
 #######################################################################
 # by path arguments (one route-hour)
