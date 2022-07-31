@@ -9,12 +9,13 @@ sam local start-api --debug
 
 #### URLS
 local
+- Home [http://127.0.0.1:3000/](http://127.0.0.1:3000/)
 - SIRI [http://127.0.0.1:3000/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4/sfsafasfasf](http://127.0.0.1:3000/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4/sfsafasfasf)
 - GTFS [http://127.0.0.1:3000/buses/bypath/nyct_mta_bus_gtfsrt/M1/2022/7/4/4/sfsafasfasf](http://127.0.0.1:3000/buses/bypath/nyct_mta_bus_gtfsrt/M1/2022/7/4/4/sfsafasfasf)
 
 deployed 
-- SIRI [https://u8lmx5wj3g.execute-api.us-east-1.amazonaws.com/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4/sfsafasfasf](https://u8lmx5wj3g.execute-api.us-east-1.amazonaws.com/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4/sfsafasfasf)
-- GTFSRT [https://u8lmx5wj3g.execute-api.us-east-1.amazonaws.com/buses/bypath/nyct_mta_bus_gtfsrt/M1/2022/7/4/4/sfsafasfasf](https://u8lmx5wj3g.execute-api.us-east-1.amazonaws.com/buses/bypath/nyct_mta_bus_gtfsrt/M1/2022/7/4/4/sfsafasfasf)
+- SIRI [https://api.buswatcher.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4/sfsafasfasf](https://api.buswatcher.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4/sfsafasfasf)
+- GTFSRT [https://api.buswatcher.org/buses/bypath/nyct_mta_bus_gtfsrt/M1/2022/7/4/4/sfsafasfasf](https://api.buswatcher.org/buses/bypath/nyct_mta_bus_gtfsrt/M1/2022/7/4/4/sfsafasfasf)
 
 
 ### To deploy/update:
@@ -29,4 +30,4 @@ sam deploy \
 
 ### Notes
 
-1. Adding permissions to SAM role https://aws.amazon.com/premiumsupport/knowledge-center/lambda-sam-template-permissions/
+1. Adding permissions to SAM role 
