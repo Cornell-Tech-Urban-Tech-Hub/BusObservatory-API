@@ -112,44 +112,33 @@ async def fetch_bulk_position_data(
                              apikey)
 
 
-#######################################################################
-# by query arguments (currently no limit on period)
-#######################################################################
+#FIXME: responses will violate Lambda memory limit (raise to 512 in template.yaml)
+#FIXME: responses will violate Lambda response size limit (figure out how to pass back an S3 location per https://jun711.github.io/aws/handling-aws-api-gateway-and-lambda-413-error/)
+# #######################################################################
+# # by query arguments (currently no limit on period)
+# #######################################################################
 
-#TODO: abstract out query args into the query path, so we can use across data sources, e.g. (e.g. 'rt' for nj, GTFSRT "vehicle.trip.route_id","vehicle.timestamp" )
-#TODO: validation for start, end
-#TODO: limit size of request by trimming period to 1 hour?
-#TODO: auth0 integration using 'apikey' https://auth0.com/blog/build-and-secure-fastapi-server-with-auth0/
+# #TODO: abstract out query args into the query path, so we can use across data sources, e.g. (e.g. 'rt' for nj, GTFSRT "vehicle.trip.route_id","vehicle.timestamp" )
+# #TODO: validation for start, end
+# #TODO: limit size of request by trimming period to 1 hour?
+# #TODO: auth0 integration using 'apikey' https://auth0.com/blog/build-and-secure-fastapi-server-with-auth0/
 
-@app.get("/buses/query/",
-         response_class=PrettyJSONResponse)
-async def fetch_position_data_by_query(
-    system_id: str, 
-    route: str, 
-    apikey:str,
-    start: str, 
-    end:str 
-    ):
-    
-    # # live db query
-    # return {
-    #         "query": 
-    #                 {
-    #                     "system_id": system_id,
-    #                     "route": route,
-    #                     "start (inclusive)":start,
-    #                     "end (not inclusive)":end,
-    #                     "apikey": apikey
-    #                 }, 
-    #         "result":query_job(system_id, route, start, end)
-    #         }
-    
-    return response_packager(query_job(system_id, route, start, end),
-                            system_id, 
-                            route, 
-                            start,
-                            end, 
-                            apikey)
+# @app.get("/buses/query/",
+#          response_class=PrettyJSONResponse)
+# async def fetch_position_data_by_query(
+#     system_id: str, 
+#     route: str, 
+#     apikey:str,
+#     start: str, 
+#     end:str 
+#     ):
+
+#     return response_packager(query_job(system_id, route, start, end),
+#                             system_id, 
+#                             route, 
+#                             start,
+#                             end, 
+#                             apikey)
 
 
 handler = Mangum(app)

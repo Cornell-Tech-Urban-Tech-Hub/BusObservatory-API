@@ -14,7 +14,8 @@ Resources:
         - AmazonS3FullAccess
       Handler: app.handler
       Runtime: python3.9
-      Timeout: 600
+      Timeout: 120
+      MemorySize: 128
       Events:
         Api:
           Type: HttpApi
