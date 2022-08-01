@@ -84,9 +84,9 @@ async def home(request: Request):
 
 #TODO: auth0 integration using 'apikey' https://auth0.com/blog/build-and-secure-fastapi-server-with-auth0/
 
-@app.get("/buses/bypath/{system_id}/{route}/{year}/{month}/{day}/{hour}/{apikey}", 
+@app.get("/buses/bulk/{system_id}/{route}/{year}/{month}/{day}/{hour}/{apikey}", 
          response_class=PrettyJSONResponse)
-async def fetch_buses_by_path(
+async def fetch_bulk_position_data(
     system_id: str, 
     route: str, 
     apikey:str,
@@ -121,9 +121,9 @@ async def fetch_buses_by_path(
 #TODO: limit size of request by trimming period to 1 hour?
 #TODO: auth0 integration using 'apikey' https://auth0.com/blog/build-and-secure-fastapi-server-with-auth0/
 
-@app.get("/buses/byquery/",
+@app.get("/buses/query/",
          response_class=PrettyJSONResponse)
-async def fetch_buses_by_query(
+async def fetch_position_data_by_query(
     system_id: str, 
     route: str, 
     apikey:str,
