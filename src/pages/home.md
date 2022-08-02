@@ -1,6 +1,3 @@
-# The Bus Observatory
-
-The Bus Observatory is a repository of big, streaming, urban transit data for non-commercial scientific and educational use.
 ## Available Data
 
 Lores mumps dolor sit mate, nominal id xiv. Dec ore offend it man re, est no dolor es explicate, re dicta elect ram demo critic duo. Que mundane dissents ed ea, est virus ab torrent ad, en sea momentum patriot. Erato dolor em omit tam quo no, per leg ere argument um re. Romanesque acclimates investiture.
@@ -145,11 +142,3 @@ We are experimenting with a more powerful tool that allows queries by arbitrary 
 
 ### Full Documentation
 For more details on endpoints, required arguments, and response formats, see the API's [Swagger]("/docs") and [Redoc]("/redoc") pages.
-
-
-## License
-Lores mumps dolor sit mate, nominal id xiv. Dec ore offend it man re, est no dolor es explicate, re dicta elect ram demo critic duo. Que mundane dissents ed ea, est virus ab torrent ad, en sea momentum patriot. Erato dolor em omit tam quo no, per leg ere argument um re. Romanesque acclimates investiture.
-
-## Acknowledgements
-
-This project uses [FastAPI](https://fastapi.tiangolo.com/), [Jinja2](https://jinja.palletsprojects.com/en/2.11.x/), and [Bootstrap4](https://getbootstrap.com/docs/4.1/getting-started/introduction/).
