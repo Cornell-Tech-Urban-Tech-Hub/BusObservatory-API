@@ -74,15 +74,41 @@ def response_packager(response, system_id, route, start, end, apikey):
 #######################################################################
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    data = openfile("home.md")
-    return templates.TemplateResponse("page.html", {"request": request, "data": data})
+    markdown = openfile("index.md") 
+    return templates.TemplateResponse(
+        "index.html", {
+            "request": request,
+            "markdown": markdown
+            }
+        )
     
+    
+#######################################################################
+# system pages
+#######################################################################
+@app.get("/nyct", response_class=HTMLResponse)
+async def home(request: Request):
+    markdown = openfile("nyct.md")
+    return templates.TemplateResponse(
+        "feeds/nyct.html", {
+            "request": request,
+            "markdown": markdown
+            }
+        )
+    
+@app.get("/njtransit", response_class=HTMLResponse)
+async def home(request: Request):
+    markdown = openfile("njtransit.md")
+    return templates.TemplateResponse(
+        "feeds/njtransit.html", {
+            "request": request,
+            "markdown": markdown
+            }
+        )
 
 #######################################################################
 # by path arguments (one route-hour)
 #######################################################################
-
-#TODO: auth0 integration using 'apikey' https://auth0.com/blog/build-and-secure-fastapi-server-with-auth0/
 
 @app.get("/buses/bulk/{system_id}/{route}/{year}/{month}/{day}/{hour}/{apikey}", 
          response_class=PrettyJSONResponse)
@@ -121,7 +147,6 @@ async def fetch_bulk_position_data(
 # #TODO: abstract out query args into the query path, so we can use across data sources, e.g. (e.g. 'rt' for nj, GTFSRT "vehicle.trip.route_id","vehicle.timestamp" )
 # #TODO: validation for start, end
 # #TODO: limit size of request by trimming period to 1 hour?
-# #TODO: auth0 integration using 'apikey' https://auth0.com/blog/build-and-secure-fastapi-server-with-auth0/
 
 # @app.get("/buses/query/",
 #          response_class=PrettyJSONResponse)

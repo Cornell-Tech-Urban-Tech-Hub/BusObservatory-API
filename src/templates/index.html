@@ -13,24 +13,41 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">Hello, world!</h1>
-        <p>The Bus Observatory is a repository of big, streaming, urban transit data created by the Jacobs Urban Tech Hub at Cornell Tech for non-commercial scientific and educational use.</p>
+        <h1 class="display-3">The Bus Observatory</h1>
+        <p>The Bus Observatory is a free public archive of real-time data on vehicles and service from transit systems around the world. This service is provided by the Jacobs Urban Tech Hub at Cornell Tech for non-commercial scientific and educational use.</p>
         <p><a class="btn btn-primary btn-lg" href="#license" role="button">License info &raquo;</a></p>
       </div>
     </div>
 
     <div class="container">
+
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Quickstart</h2>
+          <p>Lores mumps dolor sit mate, nominal id xiv. Dec ore offend it man re, est no dolor es explicate, re dicta elect ram demo critic duo. Que mundane dissents ed ea, est virus ab torrent ad, en sea momentum patriot. Erato dolor em omit tam quo no, per leg ere argument um re. Romanesque acclimates investiture.</p>
+        </div>
+      </div> <!-- /row -->
+  
+  
+      <div class="row">
+        <div class="col-md-12">
+          <h2>A 12-Column Row</h2>
+          <p>Lores mumps dolor sit mate, nominal id xiv. Dec ore offend it man re, est no dolor es explicate, re dicta elect ram demo critic duo. Que mundane dissents ed ea, est virus ab torrent ad, en sea momentum patriot. Erato dolor em omit tam quo no, per leg ere argument um re. Romanesque acclimates investiture. Lores mumps dolor sit mate, nominal id xiv. Dec ore offend it man re, est no dolor es explicate, re dicta elect ram demo critic duo. Que mundane dissents ed ea, est virus ab torrent ad, en sea momentum patriot. Erato dolor em omit tam quo no, per leg ere argument um re. Romanesque acclimates investiture.</p>
+          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+      </div> <!-- /row -->  
+
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
           <h2>New York City Transit</h2>
           <p>Our largest longitudinal data set, scraped from the MTA Bus Time SIRI feed, goes back to October 15, 2020. We also started scraping the GTFS-RT feed in May 2022.</p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-secondary" href="/nyct" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
           <h2>NJTransit</h2>
           <p>More than a years' worth of data covering every bus movement statewide across New Jersey, from April 5, 2021 through present, once per minute.</p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-secondary" href="/njtransit" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
           <h2>Your City!</h2>
@@ -43,8 +60,10 @@
 
       <div class="row">
         <div class="col-md-12">
-          <h2>A 12-Column Row</h2>
-          <p>Lores mumps dolor sit mate, nominal id xiv. Dec ore offend it man re, est no dolor es explicate, re dicta elect ram demo critic duo. Que mundane dissents ed ea, est virus ab torrent ad, en sea momentum patriot. Erato dolor em omit tam quo no, per leg ere argument um re. Romanesque acclimates investiture. Lores mumps dolor sit mate, nominal id xiv. Dec ore offend it man re, est no dolor es explicate, re dicta elect ram demo critic duo. Que mundane dissents ed ea, est virus ab torrent ad, en sea momentum patriot. Erato dolor em omit tam quo no, per leg ere argument um re. Romanesque acclimates investiture.</p>
+          <h2>Markdown Block</h2>
+          
+          {{markdown.text|safe}}
+
           <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div> <!-- /row -->
@@ -57,9 +76,6 @@
     <p>&copy; Company 2017-2018</p>
   </footer>
 
-
-
-{{data.page}}
 
 {% endblock %}
 

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}NJTransit{% endblock %}
+{% block head %}
+{{ super() }}
+
+{% endblock %}
+
+{% block page_content %}
+
+<main role="main">
+
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-md-12">
+        <h2>NJTransit</h2>
+        {{markdown.text|safe}}
+      </div>
+    </div> <!-- /row -->
+
+      <hr>
+
+    </div> <!-- /container -->
+
+  </main>
+
+  <footer class="container">
+    <p>&copy; Company 2017-2018</p>
+  </footer>
+
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+
+{% endblock %}
+
+
+
+
