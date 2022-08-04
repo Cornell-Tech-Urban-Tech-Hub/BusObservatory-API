@@ -12,6 +12,8 @@ Resources:
         - AWSGlueConsoleFullAccess
         - AmazonAthenaFullAccess
         - AmazonS3FullAccess
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: 'arn:aws:secretsmanager:us-east-1:870747888580:secret:auth0_api.buswatcher.org-Mx25l5'
       Handler: app.handler
       Runtime: python3.9
       Timeout: 120
