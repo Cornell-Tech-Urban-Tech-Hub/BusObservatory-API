@@ -8,6 +8,8 @@
 
 ### To deploy/update:
 
+Takes about 2-3 minutes on M1 MacBook Air laptop.
+
 ```
     sam build --use-container &&
     sam deploy \

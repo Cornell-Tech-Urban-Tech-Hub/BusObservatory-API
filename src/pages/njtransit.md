@@ -1,5 +1,3 @@
-*System ID*: `njtransit_bus`
-
 *Date Coverage & Frequency:*
 April 5, 2021 through present, once per minute.
 
