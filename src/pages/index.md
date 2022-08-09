@@ -3,33 +3,25 @@
 The Bus Observatory API distributes bulk bus position and operational data. This data is sampled at one-minute intervals and bundled into containers covering one route for 60 minutes (referred to as a 'route-hour' below).
 
 First, explore the schemas for our datasets so you understand what's in the data you're requesting:
-- [New York City Transit]("/nyct")
-- [NJTransit]("/njtransit")
+- [New York City Transit]("https://api.buswatcher.org/nyct")
+- [NJTransit]("https://api.buswatcher.org/njtransit")
 
 Then, retrieve the bulk data through several methods:
 
 ## 1. Download A Sample Data Set
 
-We have prepared several data sets in a variety of formats for data science explorations:
-    - New York City Transit
-        - M1 Route
-            - One day (SIRI feed) JSON CSV Parquet
-            - One day (GTFS-RT feed) JSON CSV Parquet
-            - One month (SIRI feed) JSON CSV Parquet
-        - All routes
-            - One day (SIRI feed) JSON CSV Parquet
-    - NJTransit
-        - 119 Route
-            - One day JSON CSV Parquet
-            - One month JSON CSV Parquet
-        - All routes
-            - One day JSON CSV Parquet
+We have prepared several data sets for data science explorations. All are extracted from the New York City Transit SIRI feed (`nyct_mta_bus_siri`):
+
+- **One route-day.** July 5, 2022. M1 route only. [CSV](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.M1.2022-07-05-daily.csv) (0.006 GB)
+- **One route-month.** July 1-31, 2022. M1 route only. [CSV](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-monthly.csv) (0.16 GB)
+- **One system-day.** July 5, 2022. All routes. [CSV](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-05-daily.csv) (0.71 GB)
+- **One system-month.** [CSV](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-monthly.csv) (17.1 GB)
 
 ## 2. Via the Web Console
 
 The easiest way to explore the Bus Observatory API bulk retrieval endpoint is through the [Swagger UI]("/docs"). 
 
- 1. Follow [this link]("/docs") 
+ 1. Follow [this link]("https://api.buswatcher.org/docs") 
  2. Click on the first highlighted row ("GET /buses/bulk/...")
  3. Click `Try It Out`
  4. Fill out the form. Allowed values are:
@@ -50,7 +42,7 @@ For example, to get all of the positions recorded from the New York City MTA Bus
 
     https://api.buswatcher.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/21
 
-## 4.. Via CLI
+## 4. Via CLI
 
 The [Swagger UI]("/docs") provides sample code for retrieval via `curl`. For example:
 
@@ -61,39 +53,39 @@ The [Swagger UI]("/docs") provides sample code for retrieval via `curl`. For exa
 ## 5. Via Your Own Code
 
 Those who want to retrieve more route-hour bulk data sets are encouraging to develop their own programmatic approaches to requesting hour sequences or multiple routes. For example, the following Python function:
+
 - takes a system id, a route, and a start and end time in ISO8501 format as arguments;
 - generates a list of dates and hours within this interval;
 - retrieves the bulk data for each our from the Bus Observatory API;
 - combines these responses into a single Pandas dataframe; and,
 - writes the combined dataframe to a Parquet file.
 
-```
-import pandas as pd
-import requests
 
-def get_buses(system_id, route, start, end):
+    import pandas as pd
+    import requests
 
-    df = pd.DataFrame()
+    def get_buses(system_id, route, start, end):
 
-    times = (
-        pd.date_range(start=pd.Timestamp(start), end=pd.Timestamp(end), freq="1H")
-        .to_pydatetime()
-        .tolist()
-    )
+        df = pd.DataFrame()
 
-    for t in times:
+        times = (
+            pd.date_range(start=pd.Timestamp(start), end=pd.Timestamp(end), freq="1H")
+            .to_pydatetime()
+            .tolist()
+        )
 
-        print(t)
-        url = f"https://api.buswatcher.org/buses/bulk/{system_id}/{route}/{t.year}/{t.month}/{t.day}/{t.hour}"
-        print(url)
-        r = requests.get(url).json()
-        print(r["query"])
-        newdata = pd.DataFrame.from_dict(r["result"])
-        df = pd.concat([df, newdata], ignore_index=True, sort=False)
+        for t in times:
 
-    return df
+            print(t)
+            url = f"https://api.buswatcher.org/buses/bulk/{system_id}/{route}/{t.year}/{t.month}/{t.day}/{t.hour}"
+            print(url)
+            r = requests.get(url).json()
+            print(r["query"])
+            newdata = pd.DataFrame.from_dict(r["result"])
+            df = pd.concat([df, newdata], ignore_index=True, sort=False)
 
-```
+        return df
+
 
 
 ## Usage Notes
@@ -104,4 +96,4 @@ This service is not intended to be a backend for web services, and is implemente
 We are not currently implementing any access restrictions for this service. However, API access is rate limited. If you receive a `429 Too Many Requests` error, please wait and try again later.
 
 ### Full Technical Documentation
-For full details on endpoints, required arguments, and response formats, see our [Swagger UI]("/docs") and [Redoc]("/redoc") pages.
+For full details on endpoints, required arguments, and response formats, see our [Swagger UI]("https://api.buswatcher.org/docs") and [Redoc]("https://api.buswatcher.org/redoc") pages.

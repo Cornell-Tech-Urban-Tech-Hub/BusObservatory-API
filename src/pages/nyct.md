@@ -1,4 +1,4 @@
-###**New York City Transit (SIRI)**
+###**SIRI**
 
 *System ID*: `nyct_mta_bus_siri`
 
@@ -31,7 +31,7 @@ October 16, 2020 through present. This represents nearly 2 years' worth of vehic
     route               	string              	                    
     service_date        	string    
 
-###**New York City Transit (GTFS-RT)**
+###**GTFS-RT**
 
 *System ID*: `nyct_mta_bus_gtfsrt`
 

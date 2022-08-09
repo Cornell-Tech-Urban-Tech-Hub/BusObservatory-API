@@ -1,7 +1,3 @@
-###**New Jersey Transit**
-
-NJTransit provides an unofficial open API operated by Clever Devices. We built on work by Chicago's civic hacking community, and fetch positions for the entire statewide bus system.
-
 *System ID*: `njtransit_bus`
 
 *Date Coverage & Frequency:*
