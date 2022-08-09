@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: API handler for api.buswatcher.org
+ 
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src
+      # https://aws.amazon.com/premiumsupport/knowledge-center/lambda-sam-template-permissions/
+      Policies:
+        - AWSGlueConsoleFullAccess
+        - AmazonAthenaFullAccess
+        - AmazonS3FullAccess
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: 'arn:aws:secretsmanager:us-east-1:870747888580:secret:auth0_api.buswatcher.org-Mx25l5'
+      Handler: app.handler
+      Runtime: python3.9
+      Timeout: 120
+      MemorySize: 128
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref Api
+ 
+  Api:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      Domain:
+        DomainName: api.buswatcher.org
+        CertificateArn: arn:aws:acm:us-east-1:870747888580:certificate/176e20fe-3a82-4499-bdc2-4be57a9284a9
+        EndpointConfiguration: REGIONAL
+        Route53:
+          HostedZoneId: Z08217012WCG2ZG3GJ37P
+ 
+Outputs:
+  ApiUrl:
+    Description: ID of your API
+    # Description: URL of your API
+    Value:
+      Fn::Sub: 'ID${Api}'
+      # Fn::Sub: 'https://${Api}.execute-api.${AWS::Region}.${AWS::URLSuffix}/'
