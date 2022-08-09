@@ -2,9 +2,7 @@
 
 The Bus Observatory API distributes bulk bus position and operational data. This data is sampled at one-minute intervals and bundled into containers covering one route for 60 minutes (referred to as a 'route-hour' below).
 
-First, explore the schemas for our datasets so you understand what's in the data you're requesting:
-- [New York City Transit]("https://api.buswatcher.org/nyct")
-- [NJTransit]("https://api.buswatcher.org/njtransit")
+First, explore the schemas for our datasets so you understand what's in the data you're requesting. Links are above and in the top nav bar.
 
 Then, retrieve the bulk data through several methods:
 
@@ -17,7 +15,7 @@ We have prepared several data sets for data science explorations. All are extrac
 - **One system-day.** July 5, 2022. All routes. [CSV](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-05-daily.csv) (0.71 GB)
 - **One system-month.** [CSV](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-monthly.csv) (17.1 GB)
 
-## 2. Via the Web Console
+## 2. Get Data From the Web Console
 
 The easiest way to explore the Bus Observatory API bulk retrieval endpoint is through the [Swagger UI]("/docs"). 
 
@@ -30,7 +28,7 @@ The easiest way to explore the Bus Observatory API bulk retrieval endpoint is th
     - year, month, day, hour: No leading zeros.
 5. Click `Execute`
 6. Results are presented as JSON in the browser, and can be downloaded as well.
-## 3. Via Endpoint
+## 3. Get Data Directly By Browser
 
 Data can also be accessed directly via the API endpoint.
 
@@ -42,7 +40,7 @@ For example, to get all of the positions recorded from the New York City MTA Bus
 
     https://api.buswatcher.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/21
 
-## 4. Via CLI
+## 4. Get Data Directly From A Command Line Interface (CLI)
 
 The [Swagger UI]("/docs") provides sample code for retrieval via `curl`. For example:
 
@@ -50,7 +48,7 @@ The [Swagger UI]("/docs") provides sample code for retrieval via `curl`. For exa
         'https://api.buswatcher.org/buses/bulk/nyct_mta_bus_siri/M1/2022/7/4/21' \
         -H 'accept: application/json'
 
-## 5. Via Your Own Code
+## 5. Get More Data With A Python Script 
 
 Those who want to retrieve more route-hour bulk data sets are encouraging to develop their own programmatic approaches to requesting hour sequences or multiple routes. For example, the following Python function:
 
@@ -86,14 +84,11 @@ Those who want to retrieve more route-hour bulk data sets are encouraging to dev
 
         return df
 
+## Performance, Restricitons, and Technical API Details
 
-
-## Usage Notes
-### Performance
-
+#### Rate Limiting
 This service is not intended to be a backend for web services, and is implemented entirely through serverless technologies. You may experience response times in excess of 60 seconds for bulk data requests.
-### Restrictions
+#### Restrictions
 We are not currently implementing any access restrictions for this service. However, API access is rate limited. If you receive a `429 Too Many Requests` error, please wait and try again later.
-
-### Full Technical Documentation
+####  API Technical Documentation
 For full details on endpoints, required arguments, and response formats, see our [Swagger UI]("https://api.buswatcher.org/docs") and [Redoc]("https://api.buswatcher.org/redoc") pages.
