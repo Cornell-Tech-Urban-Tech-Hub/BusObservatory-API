@@ -3,7 +3,7 @@
 
 import datetime as dt
 
-from fastapi import FastAPI, Request, Path, Depends, Response, status
+from fastapi import FastAPI, Request, Path, Response, status
 from fastapi.security import HTTPBearer
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -12,10 +12,6 @@ from fastapi.templating import Jinja2Templates
 from mangum import Mangum
 
 from .library.helpers import *
-from .library.auth import *
-
-# Scheme for the Authorization header
-token_auth_scheme = HTTPBearer()
 
 #root_path fix for docs/redoc endpoints
 app = FastAPI(title="BusObservatoryAPI",root_path="/")
@@ -81,8 +77,7 @@ async def fetch_bulk_position_data(
     year:int = Path(title="Year of service", ge=2011, le=2050), 
     month:int = Path(title="Month of service", ge=1, le=12), 
     day:int = Path(title="Day of service", ge=1, le=31),
-    hour:int = Path(title="Hour of service", ge=0, le=23),
-    token: str = Depends(token_auth_scheme)
+    hour:int = Path(title="Hour of service", ge=0, le=23)
     ):
     
     #convert year/month/day/hour into a start and end ISO 8601 timestamp for bottom and top of hour 
@@ -93,13 +88,6 @@ async def fetch_bulk_position_data(
     elif hour < 23:
         end = dt.datetime(year,month,day,(hour+1),0,0).isoformat()
     
-    # verify auth0 and return 400 BAD REQUEST if failed
-    result = VerifyToken(token.credentials).verify()
-    response = Response()
-    if result.get("status"):
-       response.status_code = status.HTTP_400_BAD_REQUEST
-       return response
-
     # otherwise run query and return results
     return response_packager(query_job(system_id, route, start, end),
                              system_id, 

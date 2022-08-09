@@ -3,14 +3,3 @@ mangum
 pythena
 jinja2
 Markdown
-PyJWT
-cryptography
-
-# asgiref==3.4.1
-# cffi==1.14.6
-# click==8.0.1
-# h11==0.12.0
-# pycparser==2.20
-# pydantic==1.8.2
-# starlette==0.14.2
-# typing-extensions==3.10.0.0
