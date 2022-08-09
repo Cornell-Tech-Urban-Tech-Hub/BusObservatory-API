@@ -5,7 +5,7 @@
 *Date Coverage:*
 October 16, 2020 through present. This represents nearly 2 years' worth of vehicle movements on one of the world's largest urban bus systems.
 
-*Schema:* The [SIRI VehicleMonitoring feed](https://bustime.mta.info/wiki/Developers/SIRIVehicleMonitoring) is a complex, data-rich feed. We parse 23 fields, but also keep the full JSON responses (these can be made available on request).
+*Schema:* The [SIRI VehicleMonitoring feed](https://bustime.mta.info/wiki/Developers/SIRIVehicleMonitoring) is a complex, data-rich feed. We parse 23 fields, but also keep the full JSON responses (these can be made available on request). Note that coverage of some fields is not available for all periods. In particular, fields marked with a * are not available before May 2021.
 
     timestamp           	timestamp       	                    
     route_long          	string              	                    
@@ -16,17 +16,17 @@ October 16, 2020 through present. This represents nearly 2 years' worth of vehic
     agency              	string              	                    
     origin_id           	string              	                    
     destination_name    	string              	                    
-    next_stop_id        	string              	                    
-    next_stop_eta       	string              	                    
-    next_stop_d_along_route	double              	                    
-    next_stop_d         	double              	                    
+    next_stop_id        	string*              	                    
+    next_stop_eta       	string*              	                    
+    next_stop_d_along_route	double*              	                    
+    next_stop_d         	double*              	                    
     lat                 	double              	                    
     lon                 	double              	                    
     bearing             	double              	                    
     progress_rate       	string              	                    
     vehicle_id          	string              	                    
     gtfs_block_id       	string              	                    
-    passenger_count     	double              	                    
+    passenger_count     	double*              	                    
     progress_status     	string              	                    
     route               	string              	                    
     service_date        	string    
