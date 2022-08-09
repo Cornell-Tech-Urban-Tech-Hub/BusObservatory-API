@@ -17,9 +17,9 @@ We have prepared several data sets for data science explorations. All are extrac
 
 ## 2. Get Data From the Web Console
 
-The easiest way to explore the Bus Observatory API bulk retrieval endpoint is through the [Swagger UI]("/docs"). 
+The easiest way to explore the Bus Observatory API bulk retrieval endpoint is through the Swagger UI](/docs). 
 
- 1. Follow [this link]("https://api.buswatcher.org/docs") 
+ 1. Follow [this link](https://api.buswatcher.org/docs) 
  2. Click on the first highlighted row ("GET /buses/bulk/...")
  3. Click `Try It Out`
  4. Fill out the form. Allowed values are:
@@ -42,7 +42,7 @@ For example, to get all of the positions recorded from the New York City MTA Bus
 
 ## 4. Get Data Directly From A Command Line Interface (CLI)
 
-The [Swagger UI]("/docs") provides sample code for retrieval via `curl`. For example:
+The [Swagger UI](/docs) provides sample code for retrieval via `curl`. For example:
 
     curl -X 'GET' \
         'https://api.buswatcher.org/buses/bulk/nyct_mta_bus_siri/M1/2022/7/4/21' \
@@ -50,13 +50,7 @@ The [Swagger UI]("/docs") provides sample code for retrieval via `curl`. For exa
 
 ## 5. Get More Data With A Python Script 
 
-Those who want to retrieve more route-hour bulk data sets are encouraging to develop their own programmatic approaches to requesting hour sequences or multiple routes. For example, the following Python function:
-
-- takes a system id, a route, and a start and end time in ISO8501 format as arguments;
-- generates a list of dates and hours within this interval;
-- retrieves the bulk data for each our from the Bus Observatory API;
-- combines these responses into a single Pandas dataframe; and,
-- writes the combined dataframe to a Parquet file.
+Those who want to retrieve more route-hour bulk data sets are encouraging to develop their own programmatic approaches to requesting hour sequences or multiple routes. For example, the following Python function takes a system_id, a route, and a start and end time in ISO8501 format as arguments; generates a list of dates and hours within this interval; retrieves the bulk data for each our from the Bus Observatory API; combines these responses into a single Pandas dataframe; and, writes the combined dataframe to a Parquet file.
 
 
     import pandas as pd
@@ -84,11 +78,12 @@ Those who want to retrieve more route-hour bulk data sets are encouraging to dev
 
         return df
 
-## Performance, Restricitons, and Technical API Details
 
+## Performance, Restrictions, and Technical API Details
+
+#### Latency
+This service is implemented entirely through serverless technologies. It not intended to be a backend for web services. You may experience response times in excess of 60 seconds for bulk data requests. 
 #### Rate Limiting
-This service is not intended to be a backend for web services, and is implemented entirely through serverless technologies. You may experience response times in excess of 60 seconds for bulk data requests.
-#### Restrictions
-We are not currently implementing any access restrictions for this service. However, API access is rate limited. If you receive a `429 Too Many Requests` error, please wait and try again later.
+API access is rate limited. If you receive a `429 Too Many Requests` error, please wait and try again later.
 ####  API Technical Documentation
-For full details on endpoints, required arguments, and response formats, see our [Swagger UI]("https://api.buswatcher.org/docs") and [Redoc]("https://api.buswatcher.org/redoc") pages.
+For full details on endpoints, required arguments, and response formats, see our [Swagger UI](https://api.buswatcher.org/docs) and [Redoc](https://api.buswatcher.org/redoc) pages.
