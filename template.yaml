@@ -8,9 +8,13 @@ Resources:
     Properties:
       CodeUri: src
       #TODO: define the privileges in this role in the Policies template below so this stack is standalone
-      Role: 'arn:aws:iam::870747888580:role/BusObservatoryAPI_Least_Privileged_Execution_Role'
+      #Role: 'arn:aws:iam::870747888580:role/BusObservatoryAPI_Least_Privileged_Execution_Role'
       # https://aws.amazon.com/premiumsupport/knowledge-center/lambda-sam-template-permissions/
       Policies:
+      Policies:
+        - AWSGlueConsoleFullAccess
+        - AmazonAthenaFullAccess
+        - AmazonS3FullAccess
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn: 'arn:aws:secretsmanager:us-east-1:870747888580:secret:auth0_api.buswatcher.org-Mx25l5'
       Handler: app.handler

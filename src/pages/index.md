@@ -2,9 +2,11 @@
 
 The Bus Observatory API distributes bulk bus position and operational data. This data is sampled at one-minute intervals and bundled into containers covering one route for 60 minutes (referred to as a 'route-hour' below).
 
-First, explore the schemas for our datasets so you understand what's in the data you're requesting. Links are above and in the top nav bar.
+First, explore the schemas for our datasets so you understand what's in the data you're requesting.
+- [New York City Transit](/nyct)
+- [NJTtransit](/njtransit)
 
-Then, retrieve the bulk data through several methods:
+Then, retrieve the bulk data through one of the following methods:
 
 ## 1. Download A Sample Data Set
 
@@ -17,7 +19,7 @@ We have prepared several data sets for data science explorations. All are extrac
 
 ## 2. Get Data From the Web Console
 
-The easiest way to explore the Bus Observatory API bulk retrieval endpoint is through the Swagger UI](/docs). 
+The easiest way to explore the Bus Observatory API bulk retrieval endpoint is through the [Swagger UI](/docs). 
 
  1. Follow [this link](https://api.buswatcher.org/docs) 
  2. Click on the first highlighted row ("GET /buses/bulk/...")
@@ -36,11 +38,9 @@ The format (with same restrictions as above) is:
 
     https://api/buswatcher.org/buses/bulk/{system_id}/{route}/{year}/{month}/{day}/{hour}
 
-For example, to get all of the positions recorded from the New York City MTA Buses SIRI feed between 9pm and 10pm on July 4, 2022.
+For example, to get all of the positions recorded from the New York City MTA Buses SIRI feed between 9pm and 10pm on July 4, 2022, go to [https://api.buswatcher.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/21](https://api.buswatcher.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/21).
 
-    https://api.buswatcher.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/21
-
-## 4. Get Data Directly From A Command Line Interface (CLI)
+## 4. Get Data Directly By Command Line Interface (CLI)
 
 The [Swagger UI](/docs) provides sample code for retrieval via `curl`. For example:
 
@@ -50,7 +50,9 @@ The [Swagger UI](/docs) provides sample code for retrieval via `curl`. For examp
 
 ## 5. Get More Data With A Python Script 
 
-Those who want to retrieve more route-hour bulk data sets are encouraging to develop their own programmatic approaches to requesting hour sequences or multiple routes. For example, the following Python function takes a system_id, a route, and a start and end time in ISO8501 format as arguments; generates a list of dates and hours within this interval; retrieves the bulk data for each our from the Bus Observatory API; combines these responses into a single Pandas dataframe; and, writes the combined dataframe to a Parquet file.
+Those who want to retrieve more route-hour bulk data sets are encouraged to develop their own programmatic approaches to requesting hour sequences or multiple routes. 
+
+For example, the following Python function takes a `system_id`, a `route`, and (`start` and `end` time in ISO8501 format) as arguments; generates a list of dates and hours within this interval; retrieves the bulk data for each our from the Bus Observatory API; and combines these responses into a single Pandas dataframe.
 
 
     import pandas as pd
@@ -78,7 +80,16 @@ Those who want to retrieve more route-hour bulk data sets are encouraging to dev
 
         return df
 
+Grabbing a whole day's data for a single route, and writing it to a single parquet file from the results is as simple as:
 
+    get_buses(
+        'nyct_mta_bus_siri', 
+        'M1', 
+        '2022-07-21T00:00:00',
+        '2022-07-22T00:00:00'
+        ).to_parquet('buses.parquet')
+
+This script may fail on certain route-hour responses due to missing/empty data. Please [share](https://forms.gle/pmhWFpx5FyRrKS7a7) any issues you encounter and we will do our best to improve the quality of our data.
 ## Performance, Restrictions, and Technical API Details
 
 #### Latency
@@ -87,3 +98,7 @@ This service is implemented entirely through serverless technologies. It not int
 API access is rate limited. If you receive a `429 Too Many Requests` error, please wait and try again later.
 ####  API Technical Documentation
 For full details on endpoints, required arguments, and response formats, see our [Swagger UI](https://api.buswatcher.org/docs) and [Redoc](https://api.buswatcher.org/redoc) pages.
+
+## Bugs
+
+Please [report](https://forms.gle/pmhWFpx5FyRrKS7a7) any problems you have using the API.
