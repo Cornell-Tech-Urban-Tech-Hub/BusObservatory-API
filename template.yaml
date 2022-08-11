@@ -32,10 +32,10 @@ Resources:
     Properties:
       Domain:
         DomainName: api.busobservatory.org
-        CertificateArn: arn:aws:acm:us-east-1:870747888580:certificate/176e20fe-3a82-4499-bdc2-4be57a9284a9
+        CertificateArn: arn:aws:acm:us-east-1:870747888580:certificate/d5dcd90b-2b51-4292-baec-2db004be6cec
         EndpointConfiguration: REGIONAL
         Route53:
-          HostedZoneId: Z08217012WCG2ZG3GJ37P
+          HostedZoneId: Z05676653JTHBS1DT8H1O
  
 Outputs:
   ApiUrl:
