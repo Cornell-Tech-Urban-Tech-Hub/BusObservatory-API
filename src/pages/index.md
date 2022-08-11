@@ -21,7 +21,7 @@ We have prepared several data sets for data science explorations. All are extrac
 
 The easiest way to explore the Bus Observatory API bulk retrieval endpoint is through the [Swagger UI](/docs). 
 
- 1. Follow [this link](https://api.buswatcher.org/docs) 
+ 1. Follow [this link](https://api.busobservatory.org/docs) 
  2. Click on the first highlighted row ("GET /buses/bulk/...")
  3. Click `Try It Out`
  4. Fill out the form. Allowed values are:
@@ -36,16 +36,16 @@ Data can also be accessed directly via the API endpoint.
 
 The format (with same restrictions as above) is:
 
-    https://api/buswatcher.org/buses/bulk/{system_id}/{route}/{year}/{month}/{day}/{hour}
+    https://api.busobservatory.org/buses/bulk/{system_id}/{route}/{year}/{month}/{day}/{hour}
 
-For example, to get all of the positions recorded from the New York City MTA Buses SIRI feed between 9pm and 10pm on July 4, 2022, go to [https://api.buswatcher.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/21](https://api.buswatcher.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/21).
+For example, to get all of the positions recorded from the New York City MTA Buses SIRI feed between 9pm and 10pm on July 4, 2022, go to [https://api.busobservatory.org/buses/bulk/nyct_mta_bus_siri/M1/2022/7/4/21](https://api.busobservatory.org/buses/bulk/nyct_mta_bus_siri/M1/2022/7/4/21).
 
 ## 4. Get Data Directly By Command Line Interface (CLI)
 
 The [Swagger UI](/docs) provides sample code for retrieval via `curl`. For example:
 
     curl -X 'GET' \
-        'https://api.buswatcher.org/buses/bulk/nyct_mta_bus_siri/M1/2022/7/4/21' \
+        'https://api.busobservatory.org/buses/bulk/nyct_mta_bus_siri/M1/2022/7/4/21' \
         -H 'accept: application/json'
 
 ## 5. Get More Data With A Python Script 
@@ -71,7 +71,7 @@ For example, the following Python function takes a `system_id`, a `route`, and (
         for t in times:
 
             print(t)
-            url = f"https://api.buswatcher.org/buses/bulk/{system_id}/{route}/{t.year}/{t.month}/{t.day}/{t.hour}"
+            url = f"https://api.busobservatory.org/buses/bulk/{system_id}/{route}/{t.year}/{t.month}/{t.day}/{t.hour}"
             print(url)
             r = requests.get(url).json()
             print(r["query"])
@@ -97,7 +97,7 @@ This service is implemented entirely through serverless technologies. It not int
 #### Rate Limiting
 API access is rate limited. If you receive a `429 Too Many Requests` error, please wait and try again later.
 ####  API Technical Documentation
-For full details on endpoints, required arguments, and response formats, see our [Swagger UI](https://api.buswatcher.org/docs) and [Redoc](https://api.buswatcher.org/redoc) pages.
+For full details on endpoints, required arguments, and response formats, see our [Swagger UI](https://api.busobservatory.org/docs) and [Redoc](https://api.busobservatory.org/redoc) pages.
 
 ## Bugs
 

@@ -31,7 +31,7 @@ Takes about 2-3 minutes on M1 MacBook Air laptop.
 - SIRI [http://127.0.0.1:3000/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4](http://127.0.0.1:3000/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4)
 
 ### Deployed AWS
-- home [https://api.buswatcher.org/](https://api.buswatcher.org/)
+- home [https://api.busobservatory.org/](https://api.busobservatory.org/)
 deployed 
-- SIRI [https://api.buswatcher.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4](https://api.buswatcher.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4)
+- SIRI [https://api.busobservatory.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4](https://api.busobservatory.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4)
 

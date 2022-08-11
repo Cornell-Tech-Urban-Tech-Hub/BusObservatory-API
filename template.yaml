@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: API handler for api.buswatcher.org
+Description: API handler for api.busobservatory.org
  
 Resources:
   Function:
@@ -16,7 +16,7 @@ Resources:
         - AmazonAthenaFullAccess
         - AmazonS3FullAccess
         - AWSSecretsManagerGetSecretValuePolicy:
-            SecretArn: 'arn:aws:secretsmanager:us-east-1:870747888580:secret:auth0_api.buswatcher.org-Mx25l5'
+            SecretArn: 'arn:aws:secretsmanager:us-east-1:870747888580:secret:auth0_api.busobservatory.org-Mx25l5'
       Handler: app.handler
       Runtime: python3.9
       Timeout: 120
@@ -31,7 +31,7 @@ Resources:
     Type: AWS::Serverless::HttpApi
     Properties:
       Domain:
-        DomainName: api.buswatcher.org
+        DomainName: api.busobservatory.org
         CertificateArn: arn:aws:acm:us-east-1:870747888580:certificate/176e20fe-3a82-4499-bdc2-4be57a9284a9
         EndpointConfiguration: REGIONAL
         Route53:
