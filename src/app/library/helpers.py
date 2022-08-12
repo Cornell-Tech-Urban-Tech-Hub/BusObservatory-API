@@ -32,7 +32,7 @@ class PrettyJSONResponse(Response):
         ).encode("utf-8")
 
 def query_job(system_id, route, start, end): 
-    athena_client = pythena.Athena(database="busobservatory")
+    athena_client = pythena.Athena(database="busobservatory", workgroup="busobservatory")
     # n.b. use single quotes in these queries otherwise Athena chokes
     query_String=   \
         f"""
