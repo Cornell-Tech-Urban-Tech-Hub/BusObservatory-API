@@ -3,8 +3,9 @@
 The Bus Observatory API distributes bulk bus position and operational data. This data is sampled at one-minute intervals and bundled into containers covering one route for 60 minutes (referred to as a 'route-hour' below).
 
 First, explore the schemas for our datasets so you understand what's in the data you're requesting.
+
 - [New York City Transit](/nyct)
-- [NJTtransit](/njtransit)
+- NJTransit (coming soon)
 
 Then, retrieve the bulk data through one of the following methods:
 
@@ -15,7 +16,6 @@ We have prepared several data sets for data science explorations. All are extrac
 - **One route-day.** July 5, 2022. M1 route only. [CSV](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.M1.2022-07-05-daily.csv) (0.006 GB)
 - **One route-month.** July 1-31, 2022. M1 route only. [CSV](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.M1.2022-07-monthly.csv) (0.16 GB)
 - **One system-day.** July 5, 2022. All routes. [CSV](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-05-daily.csv) (0.71 GB)
-- **One system-month.** [CSV](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-monthly.csv) (17.1 GB)
 
 ## 2. Get Data From the Web Console
 
@@ -25,7 +25,7 @@ The easiest way to explore the Bus Observatory API bulk retrieval endpoint is th
  2. Click on the first highlighted row ("GET /buses/bulk/...")
  3. Click `Try It Out`
  4. Fill out the form. Allowed values are:
-    - system_id: `nyct_mta_bus_siri, nyct_mta_bus_gtfsrt, njtransit_bus`
+    - system_id: `nyct_mta_bus_siri` (more to come soon)
     - route: Any valid route on the system selected.
     - year, month, day, hour: No leading zeros.
 5. Click `Execute`
