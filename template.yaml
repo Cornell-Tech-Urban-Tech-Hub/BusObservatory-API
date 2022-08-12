@@ -19,7 +19,7 @@ Resources:
             SecretArn: 'arn:aws:secretsmanager:us-east-1:870747888580:secret:auth0_api.busobservatory.org-Mx25l5'
       Handler: app.handler
       Runtime: python3.9
-      Timeout: 120
+      Timeout: 300
       MemorySize: 128
       Events:
         Api:
