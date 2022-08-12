@@ -32,7 +32,7 @@ class PrettyJSONResponse(Response):
         ).encode("utf-8")
 
 def query_job(system_id, route, start, end): 
-    athena_client = pythena.Athena(database="busobservatory", workgroup="busobservatory")
+    athena_client = pythena.Athena(database="busobservatory")
     # n.b. use single quotes in these queries otherwise Athena chokes
     query_String=   \
         f"""
@@ -44,7 +44,7 @@ def query_job(system_id, route, start, end):
         (timestamp >= from_iso8601_timestamp('{start}') AND timestamp < from_iso8601_timestamp('{end}'))
         """  
     print(query_String)
-    dataframe, _ = athena_client.execute(query=query_String)
+    dataframe, _ = athena_client.execute(query=query_String, workgroup="busobservatory")
     # n.b. JSON serializer doesn't like NaNs
     return dataframe.fillna('').to_dict(orient='records')
 
