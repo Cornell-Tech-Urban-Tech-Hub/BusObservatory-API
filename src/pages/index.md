@@ -15,9 +15,9 @@ We have prepared several data sets for data science explorations. All are extrac
 
 - **One route-day.** July 5, 2022. M1 route only. [CSV (tar,gzip)](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.M1.2022-07-05-daily.csv.tar.gz)
 - **One route-month.** July 1-31, 2022. M1 route only. [CSV (tar,gzip)](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.M1.2022-07-monthly.csv.tar.gz)
-- **One system-hour.** July 5, 2022, 8am-9am. All routes. [CSV (tar,gzip)](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-07-08-hourly.csv.tar.gz)
+- **One system-hour.** July 7, 2022, 8am-9am. All routes. [CSV (tar,gzip)](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-07-08-hourly.csv.tar.gz)
 - **One system-day.** July 5, 2022. All routes. [CSV (tar,gzip)](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-05-daily.csv.tar.gz)
-- **One system-month.** July 7, 2022. All routes. [CSV (tar,gzip)](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-monthly.csv.tar.gz)
+- **One system-month.** July 2022. All routes. [CSV (tar,gzip)](https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-monthly.csv.tar.gz)
 
 ## 2. Get Data From the Web Console
 
