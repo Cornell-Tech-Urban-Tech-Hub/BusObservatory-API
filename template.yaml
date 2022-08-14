@@ -11,7 +11,6 @@ Resources:
       #Role: 'arn:aws:iam::870747888580:role/BusObservatoryAPI_Least_Privileged_Execution_Role'
       # https://aws.amazon.com/premiumsupport/knowledge-center/lambda-sam-template-permissions/
       Policies:
-      Policies:
         - AWSGlueConsoleFullAccess
         - AmazonAthenaFullAccess
         - AmazonS3FullAccess
@@ -27,6 +26,7 @@ Resources:
           Properties:
             ApiId: !Ref Api
  
+  #FIXME: this doesnt seem to do everything it needs to, in terms of API mappings
   Api:
     Type: AWS::Serverless::HttpApi
     Properties:
