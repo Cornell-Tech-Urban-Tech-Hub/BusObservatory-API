@@ -27,6 +27,8 @@ Resources:
             ApiId: !Ref Api
  
   #FIXME: this doesnt seem to do everything it needs to, in terms of API mappings
+  #FIXME: had to go in and manually map the API to $default in API:custom domain names
+  #FIXME: tho possible i just needed to wait a few more seconds for it activate (the CloudFormation log did indicate the API mapping was created)
   Api:
     Type: AWS::Serverless::HttpApi
     Properties:

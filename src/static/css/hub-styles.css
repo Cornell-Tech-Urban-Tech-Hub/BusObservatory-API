@@ -1,4 +1,13 @@
 /* Move down content because we have a fixed navbar that is 3.5rem tall */
+
+jumbotron {
+    font-size: 90px;
+    line-height: 96px;
+    color: rgb(255 255 255/var(--tw-text-opacity));
+    font-weight: 700;
+    font-family: Playfair Display,ui-serif;
+    }
+
 body {
     padding-top: 3.5rem;
   }
