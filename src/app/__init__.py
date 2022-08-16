@@ -33,7 +33,8 @@ async def home(request: Request):
     return templates.TemplateResponse(
         "index.html", {
             "request": request,
-            "markdown": markdown
+            "markdown": markdown,
+            "config": get_config()
             }
         )
     
@@ -49,7 +50,8 @@ async def home(request: Request):
     return templates.TemplateResponse(
         "feeds/nyct.html", {
             "request": request,
-            "markdown": markdown
+            "markdown": markdown,
+            "config": get_config()
             }
         )
     
@@ -61,7 +63,8 @@ async def home(request: Request):
     return templates.TemplateResponse(
         "feeds/njtransit.html", {
             "request": request,
-            "markdown": markdown
+            "markdown": markdown,
+            "config": get_config()
             }
         )
 

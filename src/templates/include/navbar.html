@@ -14,8 +14,11 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Feeds</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="/nyct">New York City Transit</a>
-            <!-- <a class="dropdown-item" href="/njtransit">NJ Transit</a> -->
+            {% for system in config %}
+              <a class="dropdown-item" href="/nyct">{{config.city_name}} - {config.system_name}}</a>
+
+            {% endfor %}
+
           </div>
         </li>
 

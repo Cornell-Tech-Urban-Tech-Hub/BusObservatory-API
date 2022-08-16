@@ -4,6 +4,7 @@ import pythena
 from starlette.responses import Response
 import typing
 import json
+import boto3
 
 def openfile(filename):
     filepath = os.path.join("pages/", filename)
@@ -19,6 +20,17 @@ def openfile(filename):
 #######################################################################
 # helpers
 #######################################################################
+
+# load system config from s3
+def get_config():
+    # aws -- these can be hardcoded
+    region="us-east-1"
+    bucket="busobservatory"
+    config_object_key = "_bus_observatory_config.json" 
+    s3 = boto3.resource("s3")
+    obj = s3.Object(bucket, config_object_key)
+    return json.load(obj.get()['Body'])
+
 class PrettyJSONResponse(Response):
     media_type = "application/json"
 
