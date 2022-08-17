@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block title %}Bus Observatory{% endblock %}
+
 {% block head %}
 {{ super() }}
-
 {% endblock %}
 
 {% block page_content %}
@@ -11,24 +11,24 @@
 <main role="main">
   <div class="container">
 
-    <div class="leading-tight font-PlayfairDisplay font-bold text-white">Earth's data, now<span class="text-[#8ADCFE]">.</span></div>
-
-    <!-- Main jumbotron for a primary marketing message or call to action-->
+    <!-- Main jumbotron -->
     <div class="jumbotron">
       <div class="container">
-        <h1 class="title">Better data equals better buses.</h1>
+        <div class="title leading-tight font-PlayfairDisplay font-bold text-white">Earth's data, now<span class="text-[#8ADCFE]">.</span></div>
+        <h1 class="title">Better data means better buses.</h1>
         <p class="subtitle">
           The Bus Observatory is a public archive of real-time data on vehicle movements and status, collected from transit systems around the world. This free service is provided by the Jacobs Urban Tech Hub at Cornell Tech.
         </p>
         <p>
-          Explore a feed below to learn more our data sources, schema, and coverage — or <a href="https://forms.gle/NXg9hU7fSPzTt3fy7">suggest</a> a new feed. 
-          
+          Explore a feed below to learn more our data sources, schema, and coverage — or <a href="https://forms.gle/NXg9hU7fSPzTt3fy7">suggest</a> a new feed.  
+        </p>
+        <p>
           All data is licensed under a  <a href="http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display: inline-block;">CC BY-NC 4.0 license</a>. Please review the license terms before using this data.
         </p>
       </div>
     </div>
 
-    <!-- header bar -->
+    <!-- header bar
     <div class="row"> 
       <div class="col-md-12" id="quickstart">
         <h1 class="title">The Bus Observatory</h1>
@@ -39,61 +39,41 @@
           Explore a feed below to learn more our data sources, schema, and coverage. All data is licensed under a  <a href="http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display: inline-block;">CC BY-NC 4.0 license</a>. Please review the license terms before using this data.
         </p>
       </div>
-    </div> <!-- /row -->
-
-
-    <!-- City Card Gallery in Jumbotron
-    <div class="row" id="datasets">
-      <div class="col-md-4">
-        <div class="card h-100 " style="width: 18rem;">
-          <a href="/nyct">
-            <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/9/98/MTA_NYC_Bus_M42_bus_at_5th_Ave_%26_42nd_St.jpg" alt="A New York City bus.">
-          </a>
-          <div class="card-body">
-            <h5 class="card-title">
-              New York City Transit
-            </h5>
-            <p class="card-text">
-              Our largest longitudinal data set, with more than 1 billion observations (and still growing) citywide since October 2020.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100" style="width: 18rem;">
-            <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/1/1d/NJTransitRTSLegend.jpg?20060713050138" alt="A New Jersey Transit bus.">
-          <div class="card-body">
-            <h5 class="card-title">
-              Coming Soon: NJTransit
-            </h5>
-            <p class="card-text">
-              More than 300 million observations covering every bus route and run statewide since April 2021.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 " style="width: 18rem;">
-          <a href="https://forms.gle/NXg9hU7fSPzTt3fy7">
-            <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Buses_nocturnos_EMT_Madrid.JPG/640px-Buses_nocturnos_EMT_Madrid.JPG" alt="Buses at night lined up.">
-          </a>
-          <div class="card-body">
-            <h5 class="card-title">
-              Suggest A New Feed
-            </h5>
-            <p class="card-text">
-              Help us add more transit systems to Bus Observatory. 
-            </p>
-          </div>
-        </div>
+    </div>
+    -->
+    
+    <!-- Feed list -->
+    <div class="row"> <!-- INSERT MARKDOWN from pages/index.md -->
+      <div class="col-md-12" id="quickstart">
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">system_id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Place</th>
+              <th scope="col">Type & Schema</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for system_id, system_info in config.items() %}
+            <tr>
+              <th scope="row">{{system_id}}</th>
+              <td>{{system_info.system_name}}</td>
+              <td>{{system_info.city_name}}</td>
+              <td><a href="/{{system_id}}/schema">{{system_info.feed_type}}</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
     </div>
-  -->
-      <div class="row"> <!-- INSERT MARKDOWN from pages/index.md -->
-        <div class="col-md-12" id="quickstart">
-                      {{markdown.text|safe}}
-        </div>
-      </div> <!-- /row -->
+
+
+    <div class="row"> <!-- INSERT MARKDOWN from pages/index.md -->
+      <div class="col-md-12" id="quickstart">
+        {{markdown.text|safe}}
+      </div>
+    </div> <!-- /row -->
 
     </div> <!-- /container -->
   </main>

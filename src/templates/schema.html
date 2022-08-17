@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Bus Observatory{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block page_content %}
+
+<main role="main">
+  <div class="container">
+
+    <!-- header bar -->
+    <div class="row"> 
+      <div class="col-md-12" id="quickstart">
+        <h1 class="title">Feed Schema</h1>
+        <p class="subtitle">
+            system_id: {{system_id}}
+        </p>
+        <p>
+          {{ feed_info.notes }}
+        </p>
+      </div>
+    </div>
+
+
+    <div class="row"> <!-- INSERT MARKDOWN from pages/schema.md -->
+        <div class="col-md-12" id="quickstart">
+          {{markdown.text|safe}}
+        </div>
+      </div> <!-- /row -->
+
+
+    <div class="row"> 
+      <div class="col-md-12" id="quickstart">
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">system_id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Place</th>
+              <th scope="col">Type & Schema</th>
+            </tr>
+          </thead>
+          <!-- <tbody>
+            {% for system_id, system_info in config.items() %}
+            <tr>
+              <th scope="row">{{system_id}}</th>
+              <td>{{system_info.system_name}}</td>
+              <td>{{system_info.city_name}}</td>
+              <td><a href="/{{system_id}}/schema">{{system_info.feed_type}}</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        -->
+        </table>
+      </div>
+    </div>
+    </div> <!-- /container -->
+  </main>
+
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+
+{% endblock %}
+
+
+
+

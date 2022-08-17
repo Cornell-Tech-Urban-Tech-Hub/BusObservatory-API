@@ -1,4 +1,5 @@
 import os.path
+import collections
 import markdown
 import pythena
 from starlette.responses import Response
@@ -29,11 +30,12 @@ def get_config():
     config_object_key = "_bus_observatory_config.json" 
     s3 = boto3.resource("s3")
     obj = s3.Object(bucket, config_object_key)
-    return json.load(obj.get()['Body'])
+    configdata = json.load(obj.get()['Body'])
+    sorted_configdata = collections.OrderedDict(sorted(configdata.items()))
+    return sorted_configdata
 
 class PrettyJSONResponse(Response):
     media_type = "application/json"
-
     def render(self, content: typing.Any) -> bytes:
         return json.dumps(
             content,

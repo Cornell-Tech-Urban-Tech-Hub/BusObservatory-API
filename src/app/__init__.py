@@ -2,6 +2,7 @@
 # using this tutorial https://www.eliasbrange.dev/posts/deploy-fastapi-on-aws-part-1-lambda-api-gateway/
 
 import datetime as dt
+from webbrowser import get
 
 from fastapi import FastAPI, Request, Path, Response, status
 from fastapi.security import HTTPBearer
@@ -37,36 +38,54 @@ async def home(request: Request):
             "config": get_config()
             }
         )
-    
-    
+  
+  
 #######################################################################
 # system pages
 #######################################################################
-@app.get("/nyct", 
+@app.get("/{system_id}/schema", 
          response_class=HTMLResponse,
          include_in_schema=False)
-async def home(request: Request):
-    markdown = openfile("nyct.md")
+async def schema(request: Request, system_id: str):
+    markdown = openfile("schema.md") 
     return templates.TemplateResponse(
-        "feeds/nyct.html", {
+        "schema.html", {
             "request": request,
+            "system_id": system_id,
             "markdown": markdown,
-            "config": get_config()
+            # just this one system
+            "feed_info": get_config()[system_id]
             }
         )
     
-@app.get("/njtransit", 
-         response_class=HTMLResponse,
-         include_in_schema=False)
-async def home(request: Request):
-    markdown = openfile("njtransit.md")
-    return templates.TemplateResponse(
-        "feeds/njtransit.html", {
-            "request": request,
-            "markdown": markdown,
-            "config": get_config()
-            }
-        )
+# #######################################################################
+# # system pages
+# #######################################################################
+# @app.get("/nyct", 
+#          response_class=HTMLResponse,
+#          include_in_schema=False)
+# async def home(request: Request):
+#     markdown = openfile("nyct.md")
+#     return templates.TemplateResponse(
+#         "feeds/nyct.html", {
+#             "request": request,
+#             "markdown": markdown,
+#             "config": get_config()
+#             }
+#         )
+    
+# @app.get("/njtransit", 
+#          response_class=HTMLResponse,
+#          include_in_schema=False)
+# async def home(request: Request):
+#     markdown = openfile("njtransit.md")
+#     return templates.TemplateResponse(
+#         "feeds/njtransit.html", {
+#             "request": request,
+#             "markdown": markdown,
+#             "config": get_config()
+#             }
+#         )
 
 #######################################################################
 # by path arguments (one route-hour)

@@ -1,55 +1,31 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <!-- <a class="navbar-brand" href="#">Bus Observatory API v1.0</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
-
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
 
+        <!-- Home Link-->
         <li class="nav-item">
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
 
+        <!-- Feed List-->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Feeds</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            {% for system in config %}
-              <a class="dropdown-item" href="/nyct">{{config.city_name}} - {config.system_name}}</a>
-
+            {% for system_id, system_info in config.items() %}
+              <a class="dropdown-item" href="/{{system_id}}/schema">{{system_info.system_name}}</a>
             {% endfor %}
-
           </div>
         </li>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Docs</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="/docs">Swagger</a>
-            <a class="dropdown-item" href="/redoc">Redoc</a>
-          </div>
-        </li>
-
-
-
+        <!-- Swagger Link -->
         <li class="nav-item">
           <a class="nav-link" href="/docs">Try It</a>
         </li>
 
-        <!--
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-        -->
-
       </ul>
-      <a class="navbar-brand" href="#">Bus Observatory API v1.0</a>
-        <!-- <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form> -->
+
+      <!-- Version # -->
+      <a class="navbar-brand" href="#">v1.1</a> 
+
     </div>
   </nav>
