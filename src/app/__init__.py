@@ -22,7 +22,6 @@ app = FastAPI(title="BusObservatoryAPI",root_path="/")
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-
 #######################################################################
 # home page
 #######################################################################
@@ -38,7 +37,7 @@ async def home(request: Request):
             "config": get_config()
             }
         )
-  
+
   
 #######################################################################
 # system pages
@@ -46,46 +45,16 @@ async def home(request: Request):
 @app.get("/{system_id}/schema", 
          response_class=HTMLResponse,
          include_in_schema=False)
-async def schema(request: Request, system_id: str):
-    markdown = openfile("schema.md") 
+async def schema(request: Request, system_id: str):    
     return templates.TemplateResponse(
         "schema.html", {
             "request": request,
-            "system_id": system_id,
-            "markdown": markdown,
-            # just this one system
-            "feed_info": get_config()[system_id]
+            "system_id": system_id, 
+            "config": get_config(), # needed for the navbar
+            "feed_info": get_config()[system_id], # just this one system
+            "schema": get_schema(system_id) # and the schema fetched from Athena
             }
         )
-    
-# #######################################################################
-# # system pages
-# #######################################################################
-# @app.get("/nyct", 
-#          response_class=HTMLResponse,
-#          include_in_schema=False)
-# async def home(request: Request):
-#     markdown = openfile("nyct.md")
-#     return templates.TemplateResponse(
-#         "feeds/nyct.html", {
-#             "request": request,
-#             "markdown": markdown,
-#             "config": get_config()
-#             }
-#         )
-    
-# @app.get("/njtransit", 
-#          response_class=HTMLResponse,
-#          include_in_schema=False)
-# async def home(request: Request):
-#     markdown = openfile("njtransit.md")
-#     return templates.TemplateResponse(
-#         "feeds/njtransit.html", {
-#             "request": request,
-#             "markdown": markdown,
-#             "config": get_config()
-#             }
-#         )
 
 #######################################################################
 # by path arguments (one route-hour)

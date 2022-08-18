@@ -35,7 +35,9 @@
     <div class="row"> 
       <div class="col-md-12" id="quickstart">
         <table class="table table-hover">
+          {schema}
           <thead class="thead-dark">
+
             <tr>
               <th scope="col">system_id</th>
               <th scope="col">Name</th>
@@ -43,17 +45,15 @@
               <th scope="col">Type & Schema</th>
             </tr>
           </thead>
-          <!-- <tbody>
-            {% for system_id, system_info in config.items() %}
+          <tbody>
+            {% for key, value in schema.items() %}
             <tr>
-              <th scope="row">{{system_id}}</th>
-              <td>{{system_info.system_name}}</td>
-              <td>{{system_info.city_name}}</td>
-              <td><a href="/{{system_id}}/schema">{{system_info.feed_type}}</a></td>
+              <th scope="row">{{key}}</th>
+              <td>{{value}}</td>
             </tr>
             {% endfor %}
           </tbody>
-        -->
+
         </table>
       </div>
     </div>

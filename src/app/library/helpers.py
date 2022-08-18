@@ -1,22 +1,21 @@
-import os.path
+# import os.path
 import collections
-import markdown
+# import markdown
 import pythena
 from starlette.responses import Response
 import typing
 import json
 import boto3
 
-def openfile(filename):
-    filepath = os.path.join("pages/", filename)
-    with open(filepath, "r", encoding="utf-8") as input_file:
-        text = input_file.read()
-
-    html = markdown.markdown(text)
-    data = {
-        "text": html
-    }
-    return data
+# def openfile(filename):
+#     filepath = os.path.join("pages/", filename)
+#     with open(filepath, "r", encoding="utf-8") as input_file:
+#         text = input_file.read()
+#     html = markdown.markdown(text)
+#     data = {
+#         "text": html
+#     }
+#     return data
 
 #######################################################################
 # helpers
@@ -57,7 +56,7 @@ def query_job(system_id, route, start, end):
         AND
         (timestamp >= from_iso8601_timestamp('{start}') AND timestamp < from_iso8601_timestamp('{end}'))
         """  
-    print(query_String)
+    # print(query_String)
     dataframe, _ = athena_client.execute(query=query_String, workgroup="busobservatory")
     # n.b. JSON serializer doesn't like NaNs
     return dataframe.fillna('').to_dict(orient='records')
@@ -73,3 +72,22 @@ def response_packager(response, system_id, route, start, end):
                 }, 
         "result":response
         }
+
+def get_schema(system_id):
+    athena_client = pythena.Athena(database="busobservatory")
+    # n.b. use single quotes in these queries otherwise Athena chokes
+    query_String=   \
+        f"""
+        DESCRIBE {system_id.split("TEST_")[1]}
+        """
+    # #FIXME: use this one for production
+    # query_String=   \
+    #     f"""
+    #     DESCRIBE {system_id}
+    #     """
+    dataframe, _ = athena_client.execute(query=query_String, workgroup="busobservatory")
+    # n.b. JSON serializer doesn't like NaNs
+    schema = dataframe.fillna('').to_dict(orient='records')
+    print(schema)
+    # schema = {'dummy': 'data', 'realdumb':'dumber'}
+    return schema
