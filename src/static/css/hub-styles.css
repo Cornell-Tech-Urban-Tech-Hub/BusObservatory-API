@@ -1,12 +1,12 @@
 /* Move down content because we have a fixed navbar that is 3.5rem tall */
 
-jumbotron {
+/* jumbotron {
     font-size: 90px;
     line-height: 96px;
     color: rgb(255 255 255/var(--tw-text-opacity));
     font-weight: 700;
     font-family: Playfair Display,ui-serif;
-    }
+    } */
 
 body {
     padding-top: 3.5rem;
@@ -221,7 +221,7 @@ card-img-top {
 }
  code,kbd,samp{
     font-family:monospace,monospace;
-    font-size:1em;
+    font-size:0.8em;
 }
  small{
     font-size:80%;
@@ -379,15 +379,18 @@ card-img-top {
     font-feature-settings:"kern","liga","clig","calt";
 }
  h1,h2,h3,h4,h5,h6{
-    font-family:"din-2014",sans-serif;
+    font-family:georgia,serif;
 }
  h1{
     font-size:2.4rem;
 }
  h2{
-    font-size:1.8rem;
+    font-size:1.4rem;
 }
- h4,h5,h6{
+h2{
+    font-size:1.2rem;
+}
+ h3,h4,h5,h6{
     margin-top:1.5rem;
     margin-bottom:.75rem;
 }
@@ -1505,21 +1508,7 @@ card-img-top {
     background-color:#333;
     border-radius:50%;
 }
- .fSYZNu .stat.stat-companies .icon{
-    background-image:url(data:image/svg+xml;
-    base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJhIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MiA0MiI+PGRlZnM+PHN0eWxlPi5iLC5je2ZpbGw6bm9uZTt9LmR7ZmlsbDojZmZmO30uY3tzdHJva2U6I2ZmZjtzdHJva2UtbWl0ZXJsaW1pdDoxMDtzdHJva2Utd2lkdGg6MnB4O308L3N0eWxlPjwvZGVmcz48cmVjdCBjbGFzcz0iYiIgd2lkdGg9IjQyIiBoZWlnaHQ9IjQyIi8+PHBvbHlsaW5lIGNsYXNzPSJjIiBwb2ludHM9IjkuNSAzMS41IDkuNSAxMC41IDIxLjUgMTAuNSAyMS41IDMxLjUiLz48cG9seWxpbmUgY2xhc3M9ImMiIHBvaW50cz0iMjEuNSAzMS4zNiAyMS41IDE3LjM2IDMzLjUgMTcuMzYgMzMuNSAzMS4zNiIvPjxyZWN0IGNsYXNzPSJkIiB4PSIxMiIgeT0iMTMiIHdpZHRoPSIyLjc1IiBoZWlnaHQ9IjIuNzUiLz48cmVjdCBjbGFzcz0iZCIgeD0iMTYuMjUiIHk9IjEzIiB3aWR0aD0iMi43NSIgaGVpZ2h0PSIyLjc1Ii8+PHJlY3QgY2xhc3M9ImQiIHg9IjEyIiB5PSIxNy4yNSIgd2lkdGg9IjIuNzUiIGhlaWdodD0iMi43NSIvPjxyZWN0IGNsYXNzPSJkIiB4PSIxNi4yNSIgeT0iMTcuMjUiIHdpZHRoPSIyLjc1IiBoZWlnaHQ9IjIuNzUiLz48cmVjdCBjbGFzcz0iZCIgeD0iMjQiIHk9IjIwIiB3aWR0aD0iMi43NSIgaGVpZ2h0PSIyLjc1Ii8+PHJlY3QgY2xhc3M9ImQiIHg9IjI4LjI1IiB5PSIyMCIgd2lkdGg9IjIuNzUiIGhlaWdodD0iMi43NSIvPjxyZWN0IGNsYXNzPSJkIiB4PSIyNCIgeT0iMjQuMjUiIHdpZHRoPSIyLjc1IiBoZWlnaHQ9IjIuNzUiLz48cmVjdCBjbGFzcz0iZCIgeD0iMjguMjUiIHk9IjI0LjI1IiB3aWR0aD0iMi43NSIgaGVpZ2h0PSIyLjc1Ii8+PHJlY3QgY2xhc3M9ImQiIHg9IjEyIiB5PSIyMS41IiB3aWR0aD0iMi43NSIgaGVpZ2h0PSIyLjc1Ii8+PHJlY3QgY2xhc3M9ImQiIHg9IjE2LjI1IiB5PSIyMS41IiB3aWR0aD0iMi43NSIgaGVpZ2h0PSIyLjc1Ii8+PHJlY3QgY2xhc3M9ImQiIHg9IjEyIiB5PSIyNS43NSIgd2lkdGg9IjIuNzUiIGhlaWdodD0iMi43NSIvPjxyZWN0IGNsYXNzPSJkIiB4PSIxNi4yNSIgeT0iMjUuNzUiIHdpZHRoPSIyLjc1IiBoZWlnaHQ9IjIuNzUiLz48L3N2Zz4=);
-}
- .fSYZNu .stat.stat-employees .icon{
-    background-image:url(data:image/svg+xml;
-    base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJhIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MiA0MiI+PGRlZnM+PHN0eWxlPi5ie2ZpbGw6bm9uZTt9LmN7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48cmVjdCBjbGFzcz0iYiIgd2lkdGg9IjQyIiBoZWlnaHQ9IjQyIi8+PHBhdGggY2xhc3M9ImMiIGQ9Ik03LjU4LDI2LjY1YzAsLjYsLjI0LC44OSwuNzMsLjg5aDMuMDF2LTMuODJjMC0uNDksLjEyLS45NCwuMzctMS4zNCwuMjQtLjQxLC41OC0uNzIsMS4wMi0uOTRsMy4wOS0xLjQ2Yy4yNy0uMTYsLjQ5LS4zNSwuNjUtLjU3LS4zMy0uNDktLjYtMS4wNi0uODEtMS43MS0uMjItLjY1LS4zMy0xLjMzLS4zMy0yLjAzLDAtLjQzLC4wNS0uODcsLjE2LTEuMywuMTEtLjQzLC4yNC0uODQsLjQxLTEuMjItLjU0LS4zOC0xLjExLS41Ny0xLjcxLS41Ny0xLjAzLC4wNS0xLjg0LC40Ny0yLjQ0LDEuMjYtLjYsLjc5LS44OSwxLjY3LS44OSwyLjY0LC4wNSwxLjY4LC42NSwyLjg3LDEuNzksMy41OGwtNC42NCwyLjExYy0uMjcsLjE2LS40MSwuNDMtLjQxLC44MXYzLjY2aDBaIi8+PHBhdGggY2xhc3M9ImMiIGQ9Ik0xMi43LDI3LjU0Yy0uMDUsMS4xNCwuMjcsMS43NCwuOTgsMS43OWgxNC41NmMuMzMtLjExLC41Ni0uMjcsLjY5LS40OSwuMTQtLjIyLC4yLS4zOSwuMi0uNTN2LTQuNmMwLS40OS0uMTktLjgxLS41Ny0uOThsLTMuOS0xLjk1LTEuNzEtLjgxYzEuMDMtLjYsMS43MS0xLjYzLDIuMDMtMy4wOSwuMjItLjgxLC4yMi0xLjY1LDAtMi41Mi0uMjctLjk4LS43Ny0xLjgtMS41LTIuNDgtLjczLS42OC0xLjU5LTEuMDQtMi41Ni0xLjEtLjk4LC4wNS0xLjgyLC40Mi0yLjUyLDEuMS0uNywuNjgtMS4xOSwxLjQ4LTEuNDYsMi40LS4zMywxLjI1LS4yMiwyLjUyLC4zMywzLjgyLC40MywuODEsMSwxLjQ2LDEuNzEsMS45NWwtMS41NSwuNzMtNC4wNywxLjg3Yy0uNDMsLjIyLS42NSwuNTctLjY1LDEuMDZ2My44MmgwWiIvPjxwYXRoIGNsYXNzPSJjIiBkPSJNMjUuNDcsMTkuNDFjLjIyLC4yMiwuNDksLjQzLC44MSwuNjUsLjMzLC4yMiwuNjIsLjM4LC44OSwuNDksLjI3LC4xMSwuNjIsLjI2LDEuMDYsLjQ1LC40MywuMTksLjc2LC4zNCwuOTgsLjQ1LC40MywuMjIsLjc3LC41MywxLjAyLC45NHMuMzcsLjg1LC4zNywxLjM0djMuODJoMy4wOWMuNDktLjA1LC43My0uMzUsLjczLS44OXYtMy42NmMwLS4zOC0uMTQtLjY1LS40MS0uODFsLTQuNTUtMi4yYzEuMTQtLjgxLDEuNzEtMS45OCwxLjcxLTMuNSwwLTEuMDMtLjMzLTEuOTQtLjk4LTIuNzItLjY1LS43OS0xLjQ0LTEuMTgtMi4zNi0xLjE4LS42LDAtMS4xOSwuMTktMS43OSwuNTcsLjMzLC44MSwuNDksMS42NSwuNDksMi41MiwwLDEuMzYtLjM1LDIuNi0xLjA2LDMuNzRoMFoiLz48L3N2Zz4=);
-}
- .fSYZNu .stat.stat-investment .icon{
-    background-image:url(data:image/svg+xml;
-    base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJhIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MiA0MiI+PGRlZnM+PHN0eWxlPi5iLC5je2ZpbGw6bm9uZTt9LmR7ZmlsbDojZmZmO30uY3tzdHJva2U6I2ZmZjtzdHJva2UtbWl0ZXJsaW1pdDoxMDtzdHJva2Utd2lkdGg6Mi41cHg7fTwvc3R5bGU+PC9kZWZzPjxyZWN0IGNsYXNzPSJiIiB3aWR0aD0iNDIiIGhlaWdodD0iNDIiLz48cGF0aCBjbGFzcz0iZCIgZD0iTTE0LjgzLDI0LjgyYy0xLjIzLS4xMi0yLjQ5LS42MS0zLjQ5LTEuNjFsMS40OS0yLjA4YzEuMDIsLjgyLDEuODQsMS4wMiwyLjY2LDEuMDIsLjk4LDAsMS4zNy0uMzUsMS4zNy0xLjA2LDAtMS42MS01LjA1LTEuODItNS4wNS01LjI1LDAtMS45OCwxLjEyLTMuMzUsMy4wMi0zLjc2di0yLjA0aDIuMTl2MmMxLjIzLC4yMiwyLjE5LC44MiwyLjk4LDEuNjhsLTEuNjgsMS44NGMtLjY3LS41OS0xLjM3LS45LTIuMTEtLjlzLTEuMTgsLjI3LTEuMTgsMS4wMmMwLDEuNDksNS4wNSwxLjU3LDUuMDUsNS4xMywwLDEuOS0xLDMuMzktMy4wNSwzLjg4djIuMDhoLTIuMTl2LTEuOTZaIi8+PGc+PHBvbHlsaW5lIGNsYXNzPSJjIiBwb2ludHM9IjEwLjc0IDMxLjk1IDIxLjE2IDI5LjUgMjUuMzQgMTguNSAzMi42NyAxMy43OSIvPjxwb2x5bGluZSBjbGFzcz0iYyIgcG9pbnRzPSIyNy4wNCAxMi40NyAzMi42NyAxMy43MSAzMS40MyAxOS4zNSIvPjwvZz48L3N2Zz4=);
-}
- data-styled.g59[id="summaryNumbers__SummaryStatWrapper-sc-7p4lrq-0"]{
-    content:"fSYZNu,"
-}
+
  .ilmWTk{
     display:-webkit-box;
     display:-webkit-flex;
@@ -1680,7 +1669,7 @@ card-img-top {
     padding-right:10px;
 }
  .jrWyDr .title h1{
-    font-size:3rem;
+    font-size:4rem;
     line-height:1.2;
     margin-bottom:0.25rem;
     background-color:white;
@@ -1696,10 +1685,17 @@ card-img-top {
         margin-top:0rem;
     }
 }
+.jrWyDr .title h1{
+    font-size:4rem;
+    line-height:1.2;
+    margin-bottom:0.25rem;
+    background-color:white;
+    box-shadow:10px 0 0 white,-10px 0 0 white;
+}
  .jrWyDr .title .subtitle{
     font-family:"adelle",Georgia,serif;
     display:inline-block;
-    font-size:1.5rem;
+    font-size:2rem;
     background-color:white;
     box-shadow:10px 0 0 white,-10px 0 0 white;
     margin-bottom:3rem;

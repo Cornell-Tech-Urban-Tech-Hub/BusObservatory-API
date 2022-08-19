@@ -44,7 +44,7 @@ class PrettyJSONResponse(Response):
             separators=(", ", ": "),
         ).encode("utf-8")
 
-def query_job(system_id, route, start, end): 
+def query_job(config, system_id, route, start, end): 
     athena_client = pythena.Athena(database="busobservatory")
     # n.b. use single quotes in these queries otherwise Athena chokes
     query_String=   \
@@ -52,7 +52,7 @@ def query_job(system_id, route, start, end):
         SELECT *
         FROM {system_id}
         WHERE
-        route = '{route}'
+        {config[system_id]['route_key']} = '{route}'
         AND
         (timestamp >= from_iso8601_timestamp('{start}') AND timestamp < from_iso8601_timestamp('{end}'))
         """  
@@ -73,21 +73,32 @@ def response_packager(response, system_id, route, start, end):
         "result":response
         }
 
-def get_schema(system_id):
+def get_schema_old(system_id):
     athena_client = pythena.Athena(database="busobservatory")
     # n.b. use single quotes in these queries otherwise Athena chokes
-    query_String=   \
-        f"""
-        DESCRIBE {system_id.split("TEST_")[1]}
-        """
-    # #FIXME: use this one for production
     # query_String=   \
     #     f"""
-    #     DESCRIBE {system_id}
+    #     DESCRIBE {system_id.split("TEST_")[1]}
     #     """
+    #FIXME: use this one for production
+    query_String=   \
+        f"""
+        DESCRIBE {system_id}
+        """
     dataframe, _ = athena_client.execute(query=query_String, workgroup="busobservatory")
     # n.b. JSON serializer doesn't like NaNs
+    print(dataframe)
     schema = dataframe.fillna('').to_dict(orient='records')
-    print(schema)
-    # schema = {'dummy': 'data', 'realdumb':'dumber'}
+    print(type(schema))
     return schema
+
+def get_schema(system_id):
+    client = boto3.client('athena')
+    response = client.get_table_metadata(
+        CatalogName='awsdatacatalog',
+        DatabaseName='busobservatory',
+        TableName=system_id
+        )
+    print(response)
+    return response['TableMetadata']['Columns']
+    

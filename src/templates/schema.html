@@ -9,47 +9,33 @@
 {% block page_content %}
 
 <main role="main">
-  <div class="container">
+  <div class="container my-5">
 
     <!-- header bar -->
-    <div class="row"> 
-      <div class="col-md-12" id="quickstart">
-        <h1 class="title">Feed Schema</h1>
-        <p class="subtitle">
-            system_id: {{system_id}}
-        </p>
+    <div class="row my-5"> 
+      <div class="col-md-12" id="feedname">
+        <div class="jrWyDr title h1 ">Feed: {{system_id}}</div>
         <p>
           {{ feed_info.notes }}
         </p>
       </div>
     </div>
 
-
-    <div class="row"> <!-- INSERT MARKDOWN from pages/schema.md -->
-        <div class="col-md-12" id="quickstart">
-          {{markdown.text|safe}}
-        </div>
-      </div> <!-- /row -->
-
-
-    <div class="row"> 
-      <div class="col-md-12" id="quickstart">
+    <div class="row my-5"> 
+      <div class="col-md-12">
         <table class="table table-hover">
-          {schema}
           <thead class="thead-dark">
 
             <tr>
-              <th scope="col">system_id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Place</th>
-              <th scope="col">Type & Schema</th>
+              <th scope="col">field</th>
+              <th scope="col">type</th>
             </tr>
           </thead>
           <tbody>
-            {% for key, value in schema.items() %}
+            {% for row in schema %}
             <tr>
-              <th scope="row">{{key}}</th>
-              <td>{{value}}</td>
+              <td>{{row.Name}}</td>
+              <td>{{row.Type}}</td>
             </tr>
             {% endfor %}
           </tbody>
@@ -57,8 +43,23 @@
         </table>
       </div>
     </div>
-    </div> <!-- /container -->
-  </main>
+
+    <div class="row my-5">
+      <div class="col-md-12" id="buttons">
+        <a class="nav-link" href="/docs"></a><button type="button" class="btn btn-primary">Try It Primary</button></div></a>
+        <button type="button" class="btn btn-secondary">Secondary</button>
+        <button type="button" class="btn btn-success">Success</button>
+        <button type="button" class="btn btn-danger">Danger</button>
+        <button type="button" class="btn btn-warning">Warning</button>
+        <button type="button" class="btn btn-info">Info</button>
+        <button type="button" class="btn btn-light">Light</button>
+        <button type="button" class="btn btn-dark">Dark</button>
+        <button type="button" class="btn btn-link">Link</button>
+      </div>
+    </div> <!-- /row -->
+
+  </div> <!-- /container -->
+</main>
 
 
 {% endblock %}

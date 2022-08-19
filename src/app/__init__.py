@@ -29,11 +29,9 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
          response_class=HTMLResponse,
          include_in_schema=False)
 async def home(request: Request):
-    markdown = openfile("index.md") 
     return templates.TemplateResponse(
         "index.html", {
             "request": request,
-            "markdown": markdown,
             "config": get_config()
             }
         )
@@ -80,7 +78,7 @@ async def fetch_bulk_position_data(
         end = dt.datetime(year,month,day,(hour+1),0,0).isoformat()
     
     # otherwise run query and return results
-    return response_packager(query_job(system_id, route, start, end),
+    return response_packager(query_job(get_config(), system_id, route, start, end),
                              system_id, 
                              route, 
                              start,
@@ -95,21 +93,21 @@ async def fetch_bulk_position_data(
 #TODO: validation for start, end
 #TODO: limit size of request by trimming period to 1 hour?
 
-# @app.get("/buses/query/",
-#          response_class=PrettyJSONResponse)
-# async def fetch_position_data_by_query(
-#     system_id: str, 
-#     route: str, 
-#     start: str, 
-#     end:str 
-#     ):
+@app.get("/buses/query/",
+         response_class=PrettyJSONResponse)
+async def fetch_position_data_by_query(
+    system_id: str, 
+    route: str, 
+    start: str, 
+    end:str 
+    ):
 
-#     return response_packager(query_job(system_id, route, start, end),
-#                             system_id, 
-#                             route, 
-#                             start,
-#                             end, 
-#                             apikey)
+    return response_packager(query_job(system_id, route, start, end),
+                            system_id, 
+                            route, 
+                            start,
+                            end 
+                            )
 
 
 handler = Mangum(app)

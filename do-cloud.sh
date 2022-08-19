@@ -1,5 +1,5 @@
 #TODO: dont deploy me until new grabbers are in place.
-
+echo "WARNING Stack deployment disabled until migration time."
 # sam build --use-container &&
 # sam deploy \
 #     --stack-name BusObservatoryAPI \
