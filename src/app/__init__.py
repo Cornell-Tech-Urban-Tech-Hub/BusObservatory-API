@@ -14,8 +14,38 @@ from mangum import Mangum
 
 from .library.helpers import *
 
+description = """
+ChimichangApp API helps you do awesome stuff. 🚀
+
+## Items
+
+You can **read items**.
+
+## Users
+
+You will be able to:
+
+* **Create users** (_not implemented_).
+* **Read users** (_not implemented_).
+"""
+
 #root_path fix for docs/redoc endpoints
-app = FastAPI(title="BusObservatoryAPI",root_path="/")
+app = FastAPI(
+    root_path="/",
+    title="Bus Observatory API",
+    description=description,
+    version="1.0.0",
+    terms_of_service="http://example.com/terms/",
+    contact={
+         "name": "Deadpoolio the Amazing",
+         "url": "http://x-force.example.com/contact/",
+         "email": "dp@x-force.example.com",
+         },
+    license_info={
+        "name": "Apache 2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
+        },
+    )
 
 # for home page
 # using this tutorial https://levelup.gitconnected.com/building-a-website-starter-with-fastapi-92d077092864
@@ -50,7 +80,13 @@ async def schema(request: Request, system_id: str):
             "system_id": system_id, 
             "config": get_config(), # needed for the navbar
             "feed_info": get_config()[system_id], # just this one system
-            "schema": get_schema(system_id) # and the schema fetched from Athena
+            "schema": get_schema(
+                system_id
+                ), # and the schema fetched from Athena,
+            "routelist": get_routelist(
+                get_config()[system_id],
+                system_id
+                ) # and the routelist from an athena query
             }
         )
 

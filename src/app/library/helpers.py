@@ -52,11 +52,11 @@ def query_job(config, system_id, route, start, end):
         SELECT *
         FROM {system_id}
         WHERE
-        {config[system_id]['route_key']} = '{route}'
+        "{config[system_id]['route_key']}" = '{route}'
         AND
-        (timestamp >= from_iso8601_timestamp('{start}') AND timestamp < from_iso8601_timestamp('{end}'))
+        ("{config[system_id]['timestamp_key']}" >= from_iso8601_timestamp('{start}') AND "{config[system_id]['timestamp_key']}" < from_iso8601_timestamp('{end}'))
         """  
-    # print(query_String)
+    print(query_String)
     dataframe, _ = athena_client.execute(query=query_String, workgroup="busobservatory")
     # n.b. JSON serializer doesn't like NaNs
     return dataframe.fillna('').to_dict(orient='records')
@@ -73,25 +73,6 @@ def response_packager(response, system_id, route, start, end):
         "result":response
         }
 
-def get_schema_old(system_id):
-    athena_client = pythena.Athena(database="busobservatory")
-    # n.b. use single quotes in these queries otherwise Athena chokes
-    # query_String=   \
-    #     f"""
-    #     DESCRIBE {system_id.split("TEST_")[1]}
-    #     """
-    #FIXME: use this one for production
-    query_String=   \
-        f"""
-        DESCRIBE {system_id}
-        """
-    dataframe, _ = athena_client.execute(query=query_String, workgroup="busobservatory")
-    # n.b. JSON serializer doesn't like NaNs
-    print(dataframe)
-    schema = dataframe.fillna('').to_dict(orient='records')
-    print(type(schema))
-    return schema
-
 def get_schema(system_id):
     client = boto3.client('athena')
     response = client.get_table_metadata(
@@ -102,3 +83,20 @@ def get_schema(system_id):
     print(response)
     return response['TableMetadata']['Columns']
     
+    
+def get_routelist(config, system_id):
+    athena_client = pythena.Athena(database="busobservatory")
+    query_String=   \
+        f"""
+        SELECT "{config['route_key']}", COUNT(*)
+        FROM {system_id}
+        GROUP BY
+        "{config['route_key']}"
+        ORDER BY
+        "{config['route_key']}"
+        DESC
+        """
+    dataframe, _ = athena_client.execute(query=query_String, workgroup="busobservatory")
+    # n.b. JSON serializer doesn't like NaNs
+    routelist = dataframe.fillna('').to_dict(orient='records')
+    return routelist

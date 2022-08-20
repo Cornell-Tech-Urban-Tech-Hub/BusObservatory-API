@@ -12,19 +12,23 @@
   <div class="container my-5">
 
     <!-- header bar -->
-    <div class="row my-5"> 
-      <div class="col-md-12" id="feedname">
+    <div class="row my-5" id="feedname"> 
+      <div class="col-md-8" >
         <div class="jrWyDr title h1 ">Feed: {{system_id}}</div>
         <p>
           {{ feed_info.notes }}
         </p>
       </div>
-    </div>
+      <div class="col-md-4">
+        <a class="nav-link" href="/docs"></a><button type="button" class="btn btn-primary">Query This Feed</button></div></a>
+      </div>
+
 
     <div class="row my-5"> 
       <div class="col-md-12">
         <table class="table table-hover">
-          <thead class="thead-dark">
+          <div class="jrWyDr title h1 ">Schema</div>
+          <thead class="thead-light">
 
             <tr>
               <th scope="col">field</th>
@@ -44,19 +48,30 @@
       </div>
     </div>
 
-    <div class="row my-5">
-      <div class="col-md-12" id="buttons">
-        <a class="nav-link" href="/docs"></a><button type="button" class="btn btn-primary">Try It Primary</button></div></a>
-        <button type="button" class="btn btn-secondary">Secondary</button>
-        <button type="button" class="btn btn-success">Success</button>
-        <button type="button" class="btn btn-danger">Danger</button>
-        <button type="button" class="btn btn-warning">Warning</button>
-        <button type="button" class="btn btn-info">Info</button>
-        <button type="button" class="btn btn-light">Light</button>
-        <button type="button" class="btn btn-dark">Dark</button>
-        <button type="button" class="btn btn-link">Link</button>
+    <div class="row my-5"> 
+      <div class="col-md-12">
+        {{routelist}}
+        <table class="table table-hover">
+          <div class="jrWyDr title h1 ">Inventory</div>
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">route</th>
+              <th scope="col">no. of observations</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in routelist %}
+            <tr>
+              <td>{{row['vehicle.trip.route_id']}}</td>
+              <td>{{row._col1}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+
+        </table>
       </div>
-    </div> <!-- /row -->
+    </div>
+
 
   </div> <!-- /container -->
 </main>
