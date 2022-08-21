@@ -100,3 +100,17 @@ def get_routelist(config, system_id):
     # n.b. JSON serializer doesn't like NaNs
     routelist = dataframe.fillna('').to_dict(orient='records')
     return routelist
+
+def get_system_history(config, system_id):
+    athena_client = pythena.Athena(database="busobservatory")
+    query_String=   \
+        f"""            
+        SELECT year ("{config['timestamp_key']}") as y, month ("{config['timestamp_key']}") as m, day ("{config['timestamp_key']}") as d, count(*) as ct
+        FROM "test_tfnsw_buses"      
+        GROUP BY year ("{config['timestamp_key']}"), month ("{config['timestamp_key']}"), day ("{config['timestamp_key']}")
+        ORDER BY year ("{config['timestamp_key']}") ASC, month ("{config['timestamp_key']}") ASC, day ("{config['timestamp_key']}") ASC
+        """
+    dataframe, _ = athena_client.execute(query=query_String, workgroup="busobservatory")
+    # n.b. JSON serializer doesn't like NaNs
+    history = dataframe.fillna('').to_dict(orient='records')
+    return history

@@ -83,10 +83,14 @@ async def schema(request: Request, system_id: str):
             "schema": get_schema(
                 system_id
                 ), # and the schema fetched from Athena,
-            "routelist": get_routelist(
+            # "routelist": get_routelist(
+            #     get_config()[system_id],
+            #     system_id
+            #     ),
+            "history": get_system_history(
                 get_config()[system_id],
                 system_id
-                ) # and the routelist from an athena query
+                ) # and the system history from an athena query# and the routelist from an athena query,
             }
         )
 
