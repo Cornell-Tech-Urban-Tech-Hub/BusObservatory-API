@@ -31,15 +31,16 @@
     <div class="row mb-5 jrWyDr">
       <div class="col-md-4">
         <h3>Researchers</h3>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p>What happens when we mash up bus data with <a href="https://data.cityofnewyork.us/Transportation/Bus-Stop-Shelters/qafz-7myz">infrastructure maps</a>? What can we learn from benchmarking detailed metrics across cities? What new measures of service, like travel time reliability can we create?</p>
       </div>
       <div class="col-md-4">
         <h3>Students</h3>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p>
+          Cornell Tech students have <a href="https://medium.com/bus-watching/from-sensing-to-sensemaking-analyzing-visualizing-and-modeling-new-york-citys-buses-896bb42cf39f">have made</a> maps and machine-learning models from our data. What can you do?</p>
       </div>
       <div class="col-md-4">
         <h3>Advocates</h3>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p>Data was the driver for Transit Center's highly effective <a href="http://busturnaround.nyc/">Bus Turnaround</a> campaign in New York City. Power your campaign with big bus data.</p>
       </div>
     </div>
 
@@ -51,42 +52,43 @@
 
         <p>We collect bulk bus position data from transit systems around the world, sampled at one-minute intervals. The Bus Observatory API allows you to query and retrieve this data one "route-hour" at a time (60 minutes worth of observations for a single route).</p>
 
-        <h3>Download A Sample Data Set</h3>
-          <p>We have prepared several data sets for data science explorations. All are extracted from the New York City Transit SIRI feed (<code>nyct_mta_bus_siri</code>):</p>
-          <ul>
-            <li><b>One route-day.</b> July 5, 2022. M1 route only. (<a href="https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.M1.2022-07-05-daily.csv.tar.gz"></a>CSV.tar.gz</a>)</li>
-            <li><b>One route-month.</b> July 1-31, 2022. M1 route only. (<a href="https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.M1.2022-07-monthly.csv.tar.gz"></a>CSV.tar.gz</a>)</li>
-            <li><b>One system-hour.</b> July 7, 2022. All routes. (<a href="https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-07-08-hourly.csv.tar.gz"></a>CSV.tar.gz</a>)</li>
-            <li><b>One system-day.</b> July 5, 2022. All routes. (<a href="https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-05-daily.csv.tar.gz"></a>CSV.tar.gz</a>)</li>
-            <li><b>One system-month.</b> July 1-31, 2022. All routes. (<a href="https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-monthly.csv.tar.gz"></a>CSV.tar.gz</a>)</li>
-          </ul>
+            <div class="jrWyDr h3 title">1. Download A Sample Data Set</div>
+            <p>We have prepared several data sets for data science explorations. All are extracted from the New York City Transit SIRI feed (<code>nyct_mta_bus_siri</code>):</p>
+            <ul>
+              <li><b>One route-day.</b> July 5, 2022. M1 route only. (<a href="https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.M1.2022-07-05-daily.csv.tar.gz"></a>CSV.tar.gz</a>)</li>
+              <li><b>One route-month.</b> July 1-31, 2022. M1 route only. (<a href="https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.M1.2022-07-monthly.csv.tar.gz"></a>CSV.tar.gz</a>)</li>
+              <li><b>One system-hour.</b> July 7, 2022. All routes. (<a href="https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-07-08-hourly.csv.tar.gz"></a>CSV.tar.gz</a>)</li>
+              <li><b>One system-day.</b> July 5, 2022. All routes. (<a href="https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-05-daily.csv.tar.gz"></a>CSV.tar.gz</a>)</li>
+              <li><b>One system-month.</b> July 1-31, 2022. All routes. (<a href="https://urbantech-public.s3.amazonaws.com/DONT_DELETE/api.busobservatory.org%E2%80%94sampledata/nyct_mta_buses_siri.all_routes.2022-07-monthly.csv.tar.gz"></a>CSV.tar.gz</a>)</li>
+            </ul>
 
-          <h3>Try A Query</h3>
-          <ol>
-            <li>Browse the list of active feeds in the table below, and make note of the <code>system_id</code>.</li>
-            <li>Visit the Bus Observatory API's <a href=""/docs">Swagger utility</a>, and click "Try It Out". Enter the <code>system_id</code>, a route name or number from that system, and a year, month, day, and hour.</li>
-          </ol>
+            <div class="jrWyDr h3 title">2. Try A Query</div>
+            <ul>
+              <li>Browse the list of active feeds in the table below, and make note of the <code>system_id</code>.</li>
+              <li>Visit the Bus Observatory API's <a href=""/docs">Swagger utility</a>, and click "Try It Out". Enter the <code>system_id</code>, a route name or number from that system, and a year, month, day, and hour.</li>
 
-          <table class="table table-hover my-2">
-            <thead>
-              <tr>
-                <th scope="col">system_id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Place</th>
-                <th scope="col">Type & Schema</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for system_id, system_info in config.items() %}
-              <tr>
-                <th scope="row">{{system_id}}</th>
-                <td>{{system_info.system_name}}</td>
-                <td>{{system_info.city_name}}</td>
-                <td><a href="/{{system_id}}/schema">{{system_info.feed_type}}</a></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+              <table class="table table-hover table-sm my-2">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Place</th>
+                    <th scope="col">system_id</th>
+                    <th scope="col">Type & Schema</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for system_id, system_info in config.items() %}
+                  <tr>
+                    <!-- <th scope="row">{{system_id}}</th> -->
+                    <td>{{system_info.system_name}}</td>
+                    <td>{{system_info.city_name}}</td>
+                    <td>{{system_id}}</td>
+                    <td><a href="/{{system_id}}/schema">{{system_info.feed_type}}</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </ul>
 
       </div>
     </div>
@@ -97,10 +99,10 @@
         <div class="jrWyDr title h1">Next Steps</div>
         <hr>
 
-        <h3>Review the Data License</h3>
+        <div class="jrWyDr h3 title">3. Review the Data License</div>
         <p>All data is licensed under a  <a href="http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display: inline-block;">CC BY-NC 4.0 license</a>. Please review the license terms before using this data.</p>
 
-        <h3>Access the API Directly</h3>
+        <div class="jrWyDr h3 title">4. Query the API Directly</div>
 
         <p>Data can also be accessed directly via the API endpoint. The format is:</p>
 
@@ -116,7 +118,7 @@
             -H 'accept: application/json'
         </pre>
 
-        <h3>Get More Data </h3>
+        <div class="jrWyDr h3 title">5. Get Sequences of Data</div>
 
         <p>To retrieve more route-hour bulk data sets, you can request sequences or sets of route-hours. For example, the following Python function:
           <ol>

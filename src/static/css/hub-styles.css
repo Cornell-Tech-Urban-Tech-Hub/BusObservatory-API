@@ -195,9 +195,21 @@ card-img-top {
  main{
     display:block;
 }
+p{
+    font-size:0.8em;
+    margin:0.67em 0;
+}
  h1{
     font-size:2em;
+    /* margin:0.67em 0; */
+}
+ /* h2{
+    font-size:1.5em;
     margin:0.67em 0;
+}
+ h3{
+    font-size:1.2em;
+    margin:0.67em 0; */
 }
  hr{
     box-sizing:content-box;
@@ -387,8 +399,8 @@ card-img-top {
  h2{
     font-size:1.4rem;
 }
-h2{
-    font-size:1.2rem;
+h3{
+    font-size:1.0rem;
 }
  h3,h4,h5,h6{
     margin-top:1.5rem;
@@ -1675,6 +1687,22 @@ h2{
     background-color:white;
     box-shadow:10px 0 0 white,-10px 0 0 white;
 }
+.jrWyDr .title h2{
+    font-size:3rem;
+    line-height:1.2;
+    margin-bottom:0.25rem;
+    background-color:white;
+    box-shadow:10px 0 0 white,-10px 0 0 white;
+}
+.jrWyDr .title h3{
+    font-size:2rem;
+    line-height:1.2;
+    margin-bottom:0.25rem;
+    background-color:white;
+    box-shadow:10px 0 0 white,-10px 0 0 white;
+}
+
+
  @media (max-width:48em){
     .jrWyDr .title h1{
         font-size:2.4rem;
