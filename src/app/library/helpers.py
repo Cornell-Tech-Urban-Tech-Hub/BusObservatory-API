@@ -1,4 +1,4 @@
-# import os.path
+from enum import Enum
 import collections
 # import markdown
 import pythena
@@ -33,6 +33,10 @@ def get_config():
     sorted_configdata = collections.OrderedDict(sorted(configdata.items()))
     return sorted_configdata
 
+def get_system_id_enum():
+    return Enum('SystemIDs', {k:k for (k,v) in get_config().items()} )
+    # return Enum({k:k for (k,v) in get_config().items()} )
+
 class PrettyJSONResponse(Response):
     media_type = "application/json"
     def render(self, content: typing.Any) -> bytes:
@@ -47,6 +51,7 @@ class PrettyJSONResponse(Response):
 def query_job(config, system_id, route, start, end): 
     athena_client = pythena.Athena(database="busobservatory")
     # n.b. use single quotes in these queries otherwise Athena chokes
+    print(f"---------------------->{system_id}")
     query_String=   \
         f"""
         SELECT *

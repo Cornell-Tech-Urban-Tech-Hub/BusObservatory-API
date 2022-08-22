@@ -2,32 +2,25 @@
 # using this tutorial https://www.eliasbrange.dev/posts/deploy-fastapi-on-aws-part-1-lambda-api-gateway/
 
 import datetime as dt
-from webbrowser import get
-
-from fastapi import FastAPI, Request, Path, Response, status
-from fastapi.security import HTTPBearer
+from enum import Enum
+from types import SimpleNamespace
+from fastapi import FastAPI, Request, Path
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-
 from mangum import Mangum
 
 from .library.helpers import *
 
 description = """
-ChimichangApp API helps you do awesome stuff. 🚀
+The Bus Observatory is a public archive of real-time data on vehicle movements and status, collected from transit systems around the world. This free service is provided by the <a href="https://urban.tech.cornell.edu/">Jacobs Urban Tech Hub</a> at <a href="https://tech.cornell.edu/">Cornell Tech</a>. 🚀
 
-## Items
+## Bulk Bus Observations
 
 You can **read items**.
 
-## Users
-
-You will be able to:
-
-* **Create users** (_not implemented_).
-* **Read users** (_not implemented_).
 """
+
 
 #root_path fix for docs/redoc endpoints
 app = FastAPI(
@@ -35,15 +28,15 @@ app = FastAPI(
     title="Bus Observatory API",
     description=description,
     version="1.0.0",
-    terms_of_service="http://example.com/terms/",
+    # terms_of_service="http://example.com/terms/",
     contact={
-         "name": "Deadpoolio the Amazing",
-         "url": "http://x-force.example.com/contact/",
-         "email": "dp@x-force.example.com",
+         "name": "Urban Tech Hub",
+         "url": "https://urban.tech.cornell.edu/",
+         "email": "urbantech@cornell.edu",
          },
     license_info={
-        "name": "Apache 2.0",
-        "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
+        "name": "CC BY-NC 4.0",
+        "url": "http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1",
         },
     )
 
@@ -51,6 +44,8 @@ app = FastAPI(
 # using this tutorial https://levelup.gitconnected.com/building-a-website-starter-with-fastapi-92d077092864
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
 
 #######################################################################
 # home page
@@ -66,30 +61,34 @@ async def home(request: Request):
             }
         )
 
-  
+
 #######################################################################
 # system pages
 #######################################################################
+
 @app.get("/{system_id}/schema", 
          response_class=HTMLResponse,
          include_in_schema=False)
-async def schema(request: Request, system_id: str):    
+# this creates an enumeration on the fly that maps symbolic names to the unique system_ids
+async def schema(request: Request, 
+                 system_id: get_system_id_enum()
+                 ): 
     return templates.TemplateResponse(
         "schema.html", {
             "request": request,
-            "system_id": system_id, 
+            "system_id": system_id.value,
             "config": get_config(), # needed for the navbar
-            "feed_info": get_config()[system_id], # just this one system
+            "feed_info": get_config()[system_id.value], # just this one system
             "schema": get_schema(
-                system_id
+                system_id.value
                 ), # and the schema fetched from Athena,
             # "routelist": get_routelist(
-            #     get_config()[system_id],
-            #     system_id
+            #     get_config()[system_id.value],
+            #     system_id.value
             #     ),
             "history": get_system_history(
-                get_config()[system_id],
-                system_id
+                get_config()[system_id.value],
+                system_id.value
                 ) # and the system history from an athena query# and the routelist from an athena query,
             }
         )
@@ -101,7 +100,7 @@ async def schema(request: Request, system_id: str):
 @app.get("/buses/bulk/{system_id}/{route}/{year}/{month}/{day}/{hour}", 
          response_class=PrettyJSONResponse)
 async def fetch_bulk_position_data(
-    system_id: str, 
+    system_id: get_system_id_enum(), 
     route: str, 
     year:int = Path(title="Year of service", ge=2011, le=2050), 
     month:int = Path(title="Month of service", ge=1, le=12), 
@@ -118,12 +117,13 @@ async def fetch_bulk_position_data(
         end = dt.datetime(year,month,day,(hour+1),0,0).isoformat()
     
     # otherwise run query and return results
-    return response_packager(query_job(get_config(), system_id, route, start, end),
-                             system_id, 
+    return response_packager(query_job(get_config(), system_id.value, route, start, end),
+                             system_id.value, 
                              route, 
                              start,
                              end)
 
+'''
 # #######################################################################
 # # by query arguments (currently no limit on period)
 # #######################################################################
@@ -148,6 +148,6 @@ async def fetch_position_data_by_query(
                             start,
                             end 
                             )
-
+'''
 
 handler = Mangum(app)
