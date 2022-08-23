@@ -4,7 +4,7 @@
 import datetime as dt
 from enum import Enum
 from types import SimpleNamespace
-from fastapi import FastAPI, Request, Path
+from fastapi import FastAPI, Request, Path, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -12,15 +12,14 @@ from mangum import Mangum
 
 from .library.helpers import *
 
+
+
+#######################################################################
+# FastAPI
+#######################################################################
 description = """
-The Bus Observatory is a public archive of real-time data on vehicle movements and status, collected from transit systems around the world. This free service is provided by the <a href="https://urban.tech.cornell.edu/">Jacobs Urban Tech Hub</a> at <a href="https://tech.cornell.edu/">Cornell Tech</a>. 🚀
-
-## Bulk Bus Observations
-
-You can **read items**.
-
+The Bus Observatory is a public archive of real-time data on vehicle movements and status, collected from transit systems around the world. This free service is provided by the <a href="https://urban.tech.cornell.edu/">Jacobs Urban Tech Hub</a> at <a href="https://tech.cornell.edu/">Cornell Tech</a>.
 """
-
 
 #root_path fix for docs/redoc endpoints
 app = FastAPI(
@@ -50,6 +49,8 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 #######################################################################
 
 config = get_config()
+active_systems = get_system_id_enum()
+print(f"--------ACTIVE SYSTEMS: {list(active_systems)}")
 
 #######################################################################
 # home page
@@ -75,7 +76,7 @@ async def home(request: Request):
          include_in_schema=False)
 # this creates an enumeration on the fly that maps symbolic names to the unique system_ids
 async def schema(request: Request, 
-                 system_id: get_system_id_enum()
+                system_id: active_systems
                  ): 
     return templates.TemplateResponse(
         "schema.html", {
@@ -104,7 +105,7 @@ async def schema(request: Request,
 @app.get("/buses/bulk/{system_id}/{route}/{year}/{month}/{day}/{hour}", 
          response_class=PrettyJSONResponse)
 async def fetch_bulk_position_data(
-    system_id: get_system_id_enum(), 
+    system_id: active_systems, 
     route: str, 
     year:int = Path(title="Year of service", ge=2011, le=2050), 
     month:int = Path(title="Month of service", ge=1, le=12), 
@@ -122,10 +123,12 @@ async def fetch_bulk_position_data(
     
     # otherwise run query and return results
     return response_packager(query_job(config, system_id.value, route, start, end),
-                             system_id.value, 
-                             route, 
-                             start,
-                             end)
+                            system_id.value, 
+                            route, 
+                            start,
+                            end)
+    
+
 
 '''
 # #######################################################################
