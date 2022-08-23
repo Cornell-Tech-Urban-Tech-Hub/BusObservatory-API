@@ -99,7 +99,20 @@ a{
 
 
 /* footer */
-
+.ltlFI{
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-ms-flexbox;
+    display:flex;
+    margin-bottom:2rem;
+}
+ @media (max-width:48em){
+    .ltlFI{
+        -webkit-flex-direction:column;
+        -ms-flex-direction:column;
+        flex-direction:column;
+    }
+}
 data-styled.g9[id="footer__Row-sc-bwhxk7-0"]{
     content:"ltlFI,"
 }
@@ -199,4 +212,3 @@ data-styled.g9[id="footer__Row-sc-bwhxk7-0"]{
  data-styled.g15[id="footer__FooterNav-sc-bwhxk7-6"]{
     content:"bScfGR,"
 }
-
