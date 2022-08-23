@@ -61,7 +61,7 @@ async def home(request: Request):
     return templates.TemplateResponse(
         "index.html", {
             "request": request,
-            "config": get_config()
+            "config": config
             }
         )
 
@@ -81,17 +81,17 @@ async def schema(request: Request,
         "schema.html", {
             "request": request,
             "system_id": system_id.value,
-            "config": get_config(), # needed for the navbar
-            "feed_info": get_config()[system_id.value], # just this one system
+            "config": config, # needed for the navbar
+            "feed_info": config[system_id.value], # just this one system
             "schema": get_schema(
                 system_id.value
                 ), # and the schema fetched from Athena,
             # "routelist": get_routelist(
-            #     get_config()[system_id.value],
+            #     config[system_id.value],
             #     system_id.value
             #     ),
             "history": get_system_history(
-                get_config()[system_id.value],
+                config[system_id.value],
                 system_id.value
                 ) # and the system history from an athena query# and the routelist from an athena query,
             }
@@ -121,7 +121,7 @@ async def fetch_bulk_position_data(
         end = dt.datetime(year,month,day,(hour+1),0,0).isoformat()
     
     # otherwise run query and return results
-    return response_packager(query_job(get_config(), system_id.value, route, start, end),
+    return response_packager(query_job(config, system_id.value, route, start, end),
                              system_id.value, 
                              route, 
                              start,
