@@ -1,21 +1,10 @@
 from enum import Enum
 import collections
-# import markdown
 import pythena
 from starlette.responses import Response
 import typing
 import json
 import boto3
-
-# def openfile(filename):
-#     filepath = os.path.join("pages/", filename)
-#     with open(filepath, "r", encoding="utf-8") as input_file:
-#         text = input_file.read()
-#     html = markdown.markdown(text)
-#     data = {
-#         "text": html
-#     }
-#     return data
 
 #######################################################################
 # helpers
