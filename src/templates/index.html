@@ -117,12 +117,26 @@
         <p>For example, to get all of the positions recorded from the New York City MTA Buses SIRI feed between 9pm and 10pm on July 4, 2022, go to <a href="https://api.busobservatory.org/buses/bulk/nyct_mta_bus_siri/M1/2022/7/4/21">https://api.busobservatory.org/buses/bulk/nyct_mta_bus_siri/M1/2022/7/4/21</a>.<p>
 
         <p>Or, send a request from a command line using <code>curl</code>:</p>
+
+
+
+        <!--[ Code Box 2 ]-->
+<div class='K2_CBox'>
+  <div class='CB_Heading'>
+    <span>API via CLI</span>
+    <button id='copy2' class='C_box_main' onclick="copyC('copy2','code2')">
+      <i class='CBox_icn'></i>
+    </button>
+  </div>
+
+  <div id='code2'>
 <pre>
 curl -X 'GET' \
-  'https://api.busobservatory.org/buses/bulk/nyct_mta_bus_siri/M1/2022/7/4/21' \
-  -H 'accept: application/json'
+    'https://api.busobservatory.org/buses/bulk/nyct_mta_bus_siri/M1/2022/7/4/21' \
+    -H 'accept: application/json'
 </pre>
-
+</div>
+</div>
         <h3>5. Get Sequences of Data</h3>
 
         <p>To retrieve more route-hour bulk data sets, you can request sequences or sets of route-hours. For example, the following Python function:
@@ -133,25 +147,59 @@ curl -X 'GET' \
             <li>combines these responses into a single Pandas dataframe.</li>
           </ol> 
           
-<pre>
+
+
+
+<!--[ Code Box 1 ]-->
+<div class='K2_CBox'>
+  <div class='CB_Heading'>
+    <span>Download to DataFrame</span>
+    <button id='copy1' class='C_box_main' onclick="copyC('copy1','code1')">
+      <i class='CBox_icn'></i>
+    </button>
+  </div>
+
+  <!--Add Your Parse HTML code Here-->
+  <div id='code1'>
+    <pre>
 import pandas as pd
 import requests
+
 def get_buses(system_id, route, start, end):
-df = pd.DataFrame()
-times = (pd.date_range(start=pd.Timestamp(start), end=pd.Timestamp(end), freq="1H")
-    .to_pydatetime()
-    .tolist()
-)
-for t in times:
-    url = f"https://api.busobservatory.org/buses/bulk/{system_id}/{route}/{t.year}/{t.month}/{t.day}/{t.hour}"
-    r = requests.get(url).json()
-    newdata = pd.DataFrame.from_dict(r["result"])
-    df = pd.concat([df, newdata], ignore_index=True, sort=False)
-return df
- </pre>
+
+    df = pd.DataFrame()
+
+    times = (pd.date_range(start=pd.Timestamp(start), end=pd.Timestamp(end), freq="1H")
+        .to_pydatetime()
+        .tolist()
+    )
+
+    for t in times:
+        url = f"https://api.busobservatory.org/buses/bulk/{system_id}/{route}/{t.year}/{t.month}/{t.day}/{t.hour}"
+        r = requests.get(url).json()
+        newdata = pd.DataFrame.from_dict(r["result"])
+        df = pd.concat([df, newdata], ignore_index=True, sort=False)
+    
+        return df
+      
+    </pre>
+  </div>
+</div>
+
 
           <p> Then, grabbing a whole day's data for a single route, and writing it to a single parquet file from the results is as simple as:</p>
-<pre>
+
+<!--[ Code Box 3 ]-->
+<div class='K2_CBox'>
+  <div class='CB_Heading'>
+    <span>Get A Data Sequence</span>
+    <button id='copy3' class='C_box_main' onclick="copyC('copy3','code3')">
+      <i class='CBox_icn'></i>
+    </button>
+  </div>
+
+  <div id='code3'>
+          <pre>
 get_buses(
     'nyct_mta_bus_siri', 
     'M1', 
@@ -159,6 +207,8 @@ get_buses(
     '2022-07-22T00:00:00'
     ).to_parquet('buses.parquet')
 </pre>
+</div>
+</div>
 
       </div>
     </div> <!-- /row -->
