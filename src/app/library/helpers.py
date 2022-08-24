@@ -11,11 +11,7 @@ import boto3
 #######################################################################
 
 # load system config from s3
-def get_config():
-    # aws -- these can be hardcoded
-    region="us-east-1"
-    bucket="busobservatory"
-    config_object_key = "_bus_observatory_config.json" 
+def get_config(region, bucket, config_object_key):
     s3 = boto3.resource("s3")
     obj = s3.Object(bucket, config_object_key)
     configdata = json.load(obj.get()['Body'])

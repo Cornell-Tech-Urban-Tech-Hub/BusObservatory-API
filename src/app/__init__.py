@@ -2,30 +2,21 @@
 # using this tutorial https://www.eliasbrange.dev/posts/deploy-fastapi-on-aws-part-1-lambda-api-gateway/
 
 import datetime as dt
-from enum import Enum
-from types import SimpleNamespace
-from fastapi import FastAPI, Request, Path, HTTPException
+from fastapi import FastAPI, Request, Path
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from mangum import Mangum
-
 from .library.helpers import *
-
-
 
 #######################################################################
 # FastAPI
 #######################################################################
-description = """
-The Bus Observatory is a public archive of real-time data on vehicle movements and status, collected from transit systems around the world. This free service is provided by the <a href="https://urban.tech.cornell.edu/">Jacobs Urban Tech Hub</a> at <a href="https://tech.cornell.edu/">Cornell Tech</a>.
-"""
 
-#root_path fix for docs/redoc endpoints
 app = FastAPI(
-    root_path="/",
+    root_path="/", #root_path fix for docs/redoc endpoints
     title="Bus Observatory API",
-    description=description,
+    description="""The Bus Observatory is a public archive of real-time data on vehicle movements and status, collected from transit systems around the world. This free service is provided by the <a href="https://urban.tech.cornell.edu/">Jacobs Urban Tech Hub</a> at <a href="https://tech.cornell.edu/">Cornell Tech</a>.""",
     version="1.0.0",
     # terms_of_service="http://example.com/terms/",
     contact={
@@ -48,9 +39,13 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # globals
 #######################################################################
 
-config = get_config()
+region="us-east-1"
+bucket="busobservatory"
+config_object_key = "_bus_observatory_config.json" 
+config = get_config(region, bucket, config_object_key)
+
 active_systems = get_system_id_enum()
-print(f"--------ACTIVE SYSTEMS: {list(active_systems)}")
+
 
 #######################################################################
 # home page
