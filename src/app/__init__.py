@@ -43,9 +43,7 @@ region="us-east-1"
 bucket="busobservatory"
 config_object_key = "_bus_observatory_config.json" 
 config = get_config(region, bucket, config_object_key)
-
-active_systems = get_system_id_enum()
-
+active_systems = get_system_id_enum(config)
 
 #######################################################################
 # home page

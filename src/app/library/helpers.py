@@ -16,10 +16,12 @@ def get_config(region, bucket, config_object_key):
     obj = s3.Object(bucket, config_object_key)
     configdata = json.load(obj.get()['Body'])
     sorted_configdata = collections.OrderedDict(sorted(configdata.items()))
-    return sorted_configdata
+    # return sorted_configdata
+    filtered_configdata = {system_id: system_data for system_id, system_data in sorted_configdata.items() if system_data['publish'] == 'True'}
+    return filtered_configdata
 
-def get_system_id_enum():
-    return Enum('SystemIDs', {k:k for (k,v) in get_config().items()} )
+def get_system_id_enum(config):
+    return Enum('SystemIDs', {k:k for (k,v) in config.items()} )
     # return Enum({k:k for (k,v) in get_config().items()} )
 
 class PrettyJSONResponse(Response):
