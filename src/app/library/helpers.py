@@ -98,7 +98,7 @@ def get_system_history(config, system_id):
     query_String=   \
         f"""            
         SELECT year ("{config['timestamp_key']}") as y, month ("{config['timestamp_key']}") as m, day ("{config['timestamp_key']}") as d, count(*) as ct
-        FROM "test_tfnsw_buses"      
+        FROM {system_id}      
         GROUP BY year ("{config['timestamp_key']}"), month ("{config['timestamp_key']}"), day ("{config['timestamp_key']}")
         ORDER BY year ("{config['timestamp_key']}") ASC, month ("{config['timestamp_key']}") ASC, day ("{config['timestamp_key']}") ASC
         """
