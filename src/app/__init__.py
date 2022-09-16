@@ -51,8 +51,8 @@ active_systems = get_system_id_enum(config)
 #######################################################################
 
 def format_number(value):
-    return "${:,}".format(value)
-
+    return "{:,}".format(value)
+templates.env.filters["format_number"] = format_number
 
 #######################################################################
 # home page
