@@ -45,6 +45,15 @@ config_object_key = "_bus_observatory_config.json"
 config = get_config(region, bucket, config_object_key)
 active_systems = get_system_id_enum(config)
 
+
+#######################################################################
+# custom filters
+#######################################################################
+
+def format_number(value):
+    return "${:,}".format(value)
+
+
 #######################################################################
 # home page
 #######################################################################
