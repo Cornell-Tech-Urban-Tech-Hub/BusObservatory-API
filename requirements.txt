@@ -1,4 +1,3 @@
 fastapi
-mangum
 pythena
 jinja2

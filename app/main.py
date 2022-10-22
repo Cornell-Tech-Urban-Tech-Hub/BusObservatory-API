@@ -1,41 +1,11 @@
 # https://github.com/tiangolo/uvicorn-gunicorn-fastapi-docker
 from fastapi import FastAPI
 
-app = FastAPI()
-
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
-
-
-##################################### INTEGRATE LAMBDA CODE BELOW
-'''
-# FastAPI Lambda API Handler
-# using this tutorial https://www.eliasbrange.dev/posts/deploy-fastapi-on-aws-part-1-lambda-api-gateway/
-
-import datetime as dt
-from fastapi import FastAPI, Request, Path
-from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
-from mangum import Mangum
-from .library.helpers import *
-
-#######################################################################
-# FastAPI
-#######################################################################
-
 app = FastAPI(
     root_path="/", #root_path fix for docs/redoc endpoints
     title="Bus Observatory API",
     description="""The Bus Observatory is a public archive of real-time data on vehicle movements and status, collected from transit systems around the world. This free service is provided by the <a href="https://urban.tech.cornell.edu/">Jacobs Urban Tech Hub</a> at <a href="https://tech.cornell.edu/">Cornell Tech</a>.""",
-    version="1.0.0",
+    version="1.1.0",
     # terms_of_service="http://example.com/terms/",
     contact={
          "name": "Urban Tech Hub",
@@ -48,6 +18,22 @@ app = FastAPI(
         },
     )
 
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: str = None):
+    return {"item_id": item_id, "q": q}
+
+import datetime as dt
+from fastapi import FastAPI, Request, Path
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from helpers import *
+
 # for home page
 # using this tutorial https://levelup.gitconnected.com/building-a-website-starter-with-fastapi-92d077092864
 templates = Jinja2Templates(directory="templates")
@@ -57,12 +43,13 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # globals
 #######################################################################
 
+#TODO: move these to env in the dockerfile or somewhere even more safe?
+
 region="us-east-1"
 bucket="busobservatory"
 config_object_key = "_bus_observatory_config.json" 
 config = get_config(region, bucket, config_object_key)
 active_systems = get_system_id_enum(config)
-
 
 #######################################################################
 # custom filters
@@ -71,6 +58,13 @@ active_systems = get_system_id_enum(config)
 def format_number(value):
     return "{:,}".format(value)
 templates.env.filters["format_number"] = format_number
+
+'''
+##################################### INTEGRATE LAMBDA CODE BELOW
+
+# FastAPI Lambda API Handler
+# using this tutorial https://www.eliasbrange.dev/posts/deploy-fastapi-on-aws-part-1-lambda-api-gateway/
+
 
 #######################################################################
 # home page
