@@ -1,1 +1,0 @@
-sam logs --stack-name=BusObservatoryAPI
