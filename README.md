@@ -4,7 +4,9 @@
 
 1. debug AWS role
     - what are the rights that the Lambda SAM template used?
-    - this container can only use the service role of the enclosing EC2 container, maybe just update that for now
+    - this container can only use the service role of the enclosing EC2 container
+        - maybe just update that for now
+        - then later during the ECS deployment figure out how to give it its own service role in ECS with well-fitted rights
 
 ## debugging in remote 
 
