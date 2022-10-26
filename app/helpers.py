@@ -66,7 +66,7 @@ def response_packager(response, system_id, route, start, end):
         }
 
 def get_schema(system_id):
-    client = boto3.client('athena')
+    client = boto3.client('athena', region_name = 'us-east-1')
     response = client.get_table_metadata(
         CatalogName='awsdatacatalog',
         DatabaseName='busobservatory',

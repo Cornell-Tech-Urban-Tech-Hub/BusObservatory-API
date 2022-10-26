@@ -1,5 +1,11 @@
 # https://github.com/tiangolo/uvicorn-gunicorn-fastapi-docker
 from fastapi import FastAPI
+import datetime as dt
+from fastapi import FastAPI, Request, Path
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from helpers import *
 
 app = FastAPI(
     root_path="/", #root_path fix for docs/redoc endpoints
@@ -19,33 +25,17 @@ app = FastAPI(
     )
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
-
-import datetime as dt
-from fastapi import FastAPI, Request, Path
-from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
-from helpers import *
-
-# for home page
-# using this tutorial https://levelup.gitconnected.com/building-a-website-starter-with-fastapi-92d077092864
-templates = Jinja2Templates(directory="templates")
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
-
 #######################################################################
 # globals
 #######################################################################
 
-#TODO: move these to env in the dockerfile or somewhere even more safe?
+# for home page
+# using this tutorial https://levelup.gitconnected.com/building-a-website-starter-with-fastapi-92d077092864
+templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="/app/static"), name="static")
 
+
+#TODO: move these to env in the dockerfile or somewhere even more safe?
 region="us-east-1"
 bucket="busobservatory"
 config_object_key = "_bus_observatory_config.json" 
@@ -72,7 +62,6 @@ async def home(request: Request):
             "config": config
             }
         )
-
 
 #######################################################################
 # system pages
