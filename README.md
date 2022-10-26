@@ -13,7 +13,20 @@
 1. start remote EC2 server
 
     ```
+    start-queens
+    ```
+    
+    or
+
+    ```
     aws ec2 start-instances --instance-ids='\''i-02c021f07d618fd47'\'
+    ```
+
+2. ssh to EC2 server and make sure to pull latest code
+
+    ```
+    cd dev/BusObservatory-API
+    git pull
     ```
 
 2. open remote folder in VSCode dev container
