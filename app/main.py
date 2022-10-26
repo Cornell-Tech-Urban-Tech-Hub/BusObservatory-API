@@ -18,6 +18,7 @@ app = FastAPI(
         },
     )
 
+
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
@@ -37,7 +38,7 @@ from helpers import *
 # for home page
 # using this tutorial https://levelup.gitconnected.com/building-a-website-starter-with-fastapi-92d077092864
 templates = Jinja2Templates(directory="templates")
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 #######################################################################
 # globals
@@ -59,19 +60,11 @@ def format_number(value):
     return "{:,}".format(value)
 templates.env.filters["format_number"] = format_number
 
-'''
-##################################### INTEGRATE LAMBDA CODE BELOW
-
-# FastAPI Lambda API Handler
-# using this tutorial https://www.eliasbrange.dev/posts/deploy-fastapi-on-aws-part-1-lambda-api-gateway/
-
 
 #######################################################################
 # home page
 #######################################################################
-@app.get("/", 
-         response_class=HTMLResponse,
-         include_in_schema=False)
+@app.get("/", response_class=HTMLResponse, include_in_schema=False)
 async def home(request: Request):
     return templates.TemplateResponse(
         "index.html", {
@@ -89,26 +82,15 @@ async def home(request: Request):
          response_class=HTMLResponse,
          include_in_schema=False)
 # this creates an enumeration on the fly that maps symbolic names to the unique system_ids
-async def schema(request: Request, 
-                system_id: active_systems
-                 ): 
+async def schema(request: Request, system_id: active_systems): 
     return templates.TemplateResponse(
         "schema.html", {
             "request": request,
             "system_id": system_id.value,
             "config": config, # needed for the navbar
             "feed_info": config[system_id.value], # just this one system
-            "schema": get_schema(
-                system_id.value
-                ), # and the schema fetched from Athena,
-            # "routelist": get_routelist(
-            #     config[system_id.value],
-            #     system_id.value
-            #     ),
-            "history": get_system_history(
-                config[system_id.value],
-                system_id.value
-                ) # and the system history from an athena query# and the routelist from an athena query,
+            "schema": get_schema(system_id.value), # and the schema fetched from Athena,
+            "history": get_system_history(config[system_id.value], system_id.value) # and the system history from an athena query# and the routelist from an athena query,
             }
         )
 
@@ -116,8 +98,7 @@ async def schema(request: Request,
 # by path arguments (one route-hour)
 #######################################################################
 
-@app.get("/buses/bulk/{system_id}/{route}/{year}/{month}/{day}/{hour}", 
-         response_class=PrettyJSONResponse)
+@app.get("/buses/bulk/{system_id}/{route}/{year}/{month}/{day}/{hour}", response_class=PrettyJSONResponse)
 async def fetch_bulk_position_data(
     system_id: active_systems, 
     route: str, 
@@ -142,8 +123,3 @@ async def fetch_bulk_position_data(
                             start,
                             end)
     
-
-
-handler = Mangum(app)
-
-'''
