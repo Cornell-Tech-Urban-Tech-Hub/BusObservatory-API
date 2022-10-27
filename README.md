@@ -1,37 +1,50 @@
-# BusObservatory-API
+# BusObservatory-API (containerized version)
 
-### To test:
-```
-    aws sso login
-    sam build --use-container && sam local start-api --debug
-```
+## TODO
 
-### To deploy/update:
+1. debug AWS role
+    - what are the rights that the Lambda SAM template used?
+    - this container can only use the service role of the enclosing EC2 container
+        - maybe just update that for now
+        - then later during the ECS deployment figure out how to give it its own service role in ECS with well-fitted rights
 
-Takes about 2-3 minutes on M1 MacBook Air laptop.
+## debugging in remote 
 
-```
-    sam build --use-container &&
-    sam deploy \
-        --stack-name BusObservatoryAPI \
-        --s3-bucket busobservatory-api \
-        --capabilities CAPABILITY_IAM
-```
+1. start remote EC2 server
 
-### To view logs:
+    ```
+    start-queens
+    ```
+    
+    or
 
-```
-    sam logs --stack-name BusObservatoryAPI
-```
+    ```
+    aws ec2 start-instances --instance-ids='\''i-02c021f07d618fd47'\'
+    ```
 
-## URLS
+2. ssh to EC2 server and make sure to pull latest code
 
-### local test
-- Home [http://127.0.0.1:3000/](http://127.0.0.1:3000/)
-- SIRI [http://127.0.0.1:3000/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4](http://127.0.0.1:3000/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4)
+    ```
+    cd dev/BusObservatory-API
+    git pull
+    ```
 
-### Deployed AWS
-- home [https://api.busobservatory.org/](https://api.busobservatory.org/)
-deployed 
-- SIRI [https://api.busobservatory.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4](https://api.busobservatory.org/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4)
+2. open remote folder in VSCode dev container
 
+    - Cmd-P: `Remote-SSH: Connect to Host...`
+    - Cmd-P: `Open Folder in Dev container` TK
+    - Open `dev/BusObservatory-API` folder
+    - Checkout `dev/containerization` branch
+
+3. drop to shell in container
+
+    ```
+        cd app
+        uvicorn main:app
+    ```
+
+4. open url
+
+    Local ports are mapped to the remote container on EC2
+    - Home [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+    - sample SIRI feed request[http://127.0.0.1:8000/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4](http://127.0.0.1:8000/buses/bypath/nyct_mta_bus_siri/M1/2022/7/4/4)
