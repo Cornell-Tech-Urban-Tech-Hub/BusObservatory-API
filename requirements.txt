@@ -1,3 +1,5 @@
 fastapi
 pythena
 jinja2
+## only needed for deploying, dont install in the container
+# aws-cdk-lib
