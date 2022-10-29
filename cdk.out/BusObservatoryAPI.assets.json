@@ -1,0 +1,32 @@
+{
+  "version": "21.0.0",
+  "files": {
+    "800a6440597b8ad3580b4fa7b89679e24855c4422e30d0ba085f2bad17192c7f": {
+      "source": {
+        "path": "BusObservatoryAPI.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "800a6440597b8ad3580b4fa7b89679e24855c4422e30d0ba085f2bad17192c7f.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {
+    "638ef394832bd2d1feaf1f1c5468731a0d19a07083df517e3af1165225ceb6f4": {
+      "source": {
+        "directory": "asset.638ef394832bd2d1feaf1f1c5468731a0d19a07083df517e3af1165225ceb6f4"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "repositoryName": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}",
+          "imageTag": "638ef394832bd2d1feaf1f1c5468731a0d19a07083df517e3af1165225ceb6f4",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-image-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  }
+}
