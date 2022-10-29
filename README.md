@@ -2,8 +2,7 @@
 
 ### To test:
 ```
-    aws sso login
-    sam build --use-container && sam local start-api --debug
+do-local.sh
 ```
 
 ### To deploy/update:
@@ -11,11 +10,7 @@
 Takes about 2-3 minutes on M1 MacBook Air laptop.
 
 ```
-    sam build --use-container &&
-    sam deploy \
-        --stack-name BusObservatoryAPI \
-        --s3-bucket busobservatory-api \
-        --capabilities CAPABILITY_IAM
+do-cloud.sh
 ```
 
 ### To view logs:
