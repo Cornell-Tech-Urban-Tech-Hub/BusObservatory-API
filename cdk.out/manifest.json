@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/800a6440597b8ad3580b4fa7b89679e24855c4422e30d0ba085f2bad17192c7f.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/166fb95a2ba7679c574135e91557ecc4e7ccda028bdcae3dbedb0ae184d44031.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -229,6 +229,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceTaskDefTaskRole69AD8EA5"
+          }
+        ],
+        "/BusObservatoryAPI/BusObservatoryAPI_Service/TaskDef/TaskRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BusObservatoryAPIServiceTaskDefTaskRoleDefaultPolicy1A02BDB4"
           }
         ],
         "/BusObservatoryAPI/BusObservatoryAPI_Service/TaskDef/Resource": [

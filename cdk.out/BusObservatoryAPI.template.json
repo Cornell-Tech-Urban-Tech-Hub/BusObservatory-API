@@ -604,10 +604,51 @@
       }
      ],
      "Version": "2012-10-17"
-    }
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonAthenaFullAccess"
+       ]
+      ]
+     }
+    ]
    },
    "Metadata": {
     "aws:cdk:path": "BusObservatoryAPI/BusObservatoryAPI_Service/TaskDef/TaskRole/Resource"
+   }
+  },
+  "BusObservatoryAPIServiceTaskDefTaskRoleDefaultPolicy1A02BDB4": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:DescribeSecret"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:secretsmanager:us-east-1:870747888580:secret:auth0_api.busobservatory.org-Mx25l5"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "BusObservatoryAPIServiceTaskDefTaskRoleDefaultPolicy1A02BDB4",
+    "Roles": [
+     {
+      "Ref": "BusObservatoryAPIServiceTaskDefTaskRole69AD8EA5"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI/BusObservatoryAPI_Service/TaskDef/TaskRole/DefaultPolicy/Resource"
    }
   },
   "BusObservatoryAPIServiceTaskDefCF638862": {
@@ -617,7 +658,7 @@
      {
       "Essential": true,
       "Image": {
-       "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:638ef394832bd2d1feaf1f1c5468731a0d19a07083df517e3af1165225ceb6f4"
+       "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:81d3a10b79e2c5d700905412b79a138191e847c8e741fd17a27d3e4d04c656ee"
       },
       "LogConfiguration": {
        "LogDriver": "awslogs",
