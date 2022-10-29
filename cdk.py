@@ -4,5 +4,5 @@ from stack import BusObservatoryAPI
 
 app = App()
 
-BusObservatoryAPI(app, "BusObservatoryAPI")
+BusObservatoryAPI(app, "BusObservatoryAPI-ECS")
 app.synth()
