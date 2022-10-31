@@ -47,8 +47,10 @@ class BusObservatoryAPI(Stack):
         
         self.ecs_service.task_definition.task_role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("AmazonAthenaFullAccess"))
         # self.ecs_service.task_definition.task_role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("AWSGlueConsoleFullAccess"))
-        # self.ecs_service.task_definition.task_role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("S3FullAccess"))
-        
+
+        self.ecs_service.task_definition.task_role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("S3FullBusObservatory"))
+        # self.ecs_service.task_definition.task_role.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("S3FullAccess"))        
+
         # get the secret and grant access to the ECS Task Role
         secret = sm.Secret.from_secret_attributes(self, "ImportedSecret",
             secret_complete_arn="arn:aws:secretsmanager:us-east-1:870747888580:secret:auth0_api.busobservatory.org-Mx25l5"

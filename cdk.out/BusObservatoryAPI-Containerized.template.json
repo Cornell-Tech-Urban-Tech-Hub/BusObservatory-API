@@ -1,0 +1,1168 @@
+{
+ "Resources": {
+  "BusObservatoryAPIVPC3D167F78": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/Resource"
+   }
+  },
+  "BusObservatoryAPIVPCPublicSubnet1Subnet8E6E2363": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BusObservatoryAPIVPC3D167F78"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1/Subnet"
+   }
+  },
+  "BusObservatoryAPIVPCPublicSubnet1RouteTableE23147C2": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BusObservatoryAPIVPC3D167F78"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1/RouteTable"
+   }
+  },
+  "BusObservatoryAPIVPCPublicSubnet1RouteTableAssociationC2A76367": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "BusObservatoryAPIVPCPublicSubnet1RouteTableE23147C2"
+    },
+    "SubnetId": {
+     "Ref": "BusObservatoryAPIVPCPublicSubnet1Subnet8E6E2363"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "BusObservatoryAPIVPCPublicSubnet1DefaultRoute66D24037": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "BusObservatoryAPIVPCPublicSubnet1RouteTableE23147C2"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "BusObservatoryAPIVPCIGW47FA2419"
+    }
+   },
+   "DependsOn": [
+    "BusObservatoryAPIVPCVPCGW56E84800"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "BusObservatoryAPIVPCPublicSubnet1EIP2CDEEA9D": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1/EIP"
+   }
+  },
+  "BusObservatoryAPIVPCPublicSubnet1NATGateway3BEA6517": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "BusObservatoryAPIVPCPublicSubnet1Subnet8E6E2363"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "BusObservatoryAPIVPCPublicSubnet1EIP2CDEEA9D",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "BusObservatoryAPIVPCPublicSubnet1DefaultRoute66D24037",
+    "BusObservatoryAPIVPCPublicSubnet1RouteTableAssociationC2A76367"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1/NATGateway"
+   }
+  },
+  "BusObservatoryAPIVPCPublicSubnet2SubnetBA406360": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BusObservatoryAPIVPC3D167F78"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2/Subnet"
+   }
+  },
+  "BusObservatoryAPIVPCPublicSubnet2RouteTableE235A170": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BusObservatoryAPIVPC3D167F78"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2/RouteTable"
+   }
+  },
+  "BusObservatoryAPIVPCPublicSubnet2RouteTableAssociation0306698E": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "BusObservatoryAPIVPCPublicSubnet2RouteTableE235A170"
+    },
+    "SubnetId": {
+     "Ref": "BusObservatoryAPIVPCPublicSubnet2SubnetBA406360"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "BusObservatoryAPIVPCPublicSubnet2DefaultRouteF049AA08": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "BusObservatoryAPIVPCPublicSubnet2RouteTableE235A170"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "BusObservatoryAPIVPCIGW47FA2419"
+    }
+   },
+   "DependsOn": [
+    "BusObservatoryAPIVPCVPCGW56E84800"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "BusObservatoryAPIVPCPublicSubnet2EIPB21A3CB0": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2/EIP"
+   }
+  },
+  "BusObservatoryAPIVPCPublicSubnet2NATGateway360D19E0": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "BusObservatoryAPIVPCPublicSubnet2SubnetBA406360"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "BusObservatoryAPIVPCPublicSubnet2EIPB21A3CB0",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "BusObservatoryAPIVPCPublicSubnet2DefaultRouteF049AA08",
+    "BusObservatoryAPIVPCPublicSubnet2RouteTableAssociation0306698E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2/NATGateway"
+   }
+  },
+  "BusObservatoryAPIVPCPrivateSubnet1Subnet52EDAB22": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BusObservatoryAPIVPC3D167F78"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet1/Subnet"
+   }
+  },
+  "BusObservatoryAPIVPCPrivateSubnet1RouteTableF477C9BC": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BusObservatoryAPIVPC3D167F78"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet1/RouteTable"
+   }
+  },
+  "BusObservatoryAPIVPCPrivateSubnet1RouteTableAssociationF43E028C": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "BusObservatoryAPIVPCPrivateSubnet1RouteTableF477C9BC"
+    },
+    "SubnetId": {
+     "Ref": "BusObservatoryAPIVPCPrivateSubnet1Subnet52EDAB22"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "BusObservatoryAPIVPCPrivateSubnet1DefaultRoute84C8DB01": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "BusObservatoryAPIVPCPrivateSubnet1RouteTableF477C9BC"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "BusObservatoryAPIVPCPublicSubnet1NATGateway3BEA6517"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "BusObservatoryAPIVPCPrivateSubnet2Subnet28A53EEB": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BusObservatoryAPIVPC3D167F78"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet2/Subnet"
+   }
+  },
+  "BusObservatoryAPIVPCPrivateSubnet2RouteTableF9269DA0": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BusObservatoryAPIVPC3D167F78"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet2/RouteTable"
+   }
+  },
+  "BusObservatoryAPIVPCPrivateSubnet2RouteTableAssociation37BA6977": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "BusObservatoryAPIVPCPrivateSubnet2RouteTableF9269DA0"
+    },
+    "SubnetId": {
+     "Ref": "BusObservatoryAPIVPCPrivateSubnet2Subnet28A53EEB"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "BusObservatoryAPIVPCPrivateSubnet2DefaultRouteFB628356": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "BusObservatoryAPIVPCPrivateSubnet2RouteTableF9269DA0"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "BusObservatoryAPIVPCPublicSubnet2NATGateway360D19E0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "BusObservatoryAPIVPCIGW47FA2419": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/IGW"
+   }
+  },
+  "BusObservatoryAPIVPCVPCGW56E84800": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BusObservatoryAPIVPC3D167F78"
+    },
+    "InternetGatewayId": {
+     "Ref": "BusObservatoryAPIVPCIGW47FA2419"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/VPCGW"
+   }
+  },
+  "BusObservatoryAPIECSCluster93BB5A4E": {
+   "Type": "AWS::ECS::Cluster",
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_ECSCluster/Resource"
+   }
+  },
+  "BusObservatoryAPIServiceLB6DDF7E2F": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Scheme": "internet-facing",
+    "SecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "BusObservatoryAPIServiceLBSecurityGroupF44C2BE3",
+       "GroupId"
+      ]
+     }
+    ],
+    "Subnets": [
+     {
+      "Ref": "BusObservatoryAPIVPCPublicSubnet1Subnet8E6E2363"
+     },
+     {
+      "Ref": "BusObservatoryAPIVPCPublicSubnet2SubnetBA406360"
+     }
+    ],
+    "Type": "application"
+   },
+   "DependsOn": [
+    "BusObservatoryAPIVPCPublicSubnet1DefaultRoute66D24037",
+    "BusObservatoryAPIVPCPublicSubnet1RouteTableAssociationC2A76367",
+    "BusObservatoryAPIVPCPublicSubnet2DefaultRouteF049AA08",
+    "BusObservatoryAPIVPCPublicSubnet2RouteTableAssociation0306698E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/LB/Resource"
+   }
+  },
+  "BusObservatoryAPIServiceLBSecurityGroupF44C2BE3": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatically created Security Group for ELB BusObservatoryAPIContainerizedBusObservatoryAPIServiceLBC81AB584",
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow from anyone on port 80",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     }
+    ],
+    "VpcId": {
+     "Ref": "BusObservatoryAPIVPC3D167F78"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/LB/SecurityGroup/Resource"
+   }
+  },
+  "BusObservatoryAPIServiceLBSecurityGrouptoBusObservatoryAPIContainerizedBusObservatoryAPIServiceSecurityGroup30728F3E80AC9AFBC3": {
+   "Type": "AWS::EC2::SecurityGroupEgress",
+   "Properties": {
+    "GroupId": {
+     "Fn::GetAtt": [
+      "BusObservatoryAPIServiceLBSecurityGroupF44C2BE3",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "DestinationSecurityGroupId": {
+     "Fn::GetAtt": [
+      "BusObservatoryAPIServiceSecurityGroupC867F678",
+      "GroupId"
+     ]
+    },
+    "FromPort": 80,
+    "ToPort": 80
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/LB/SecurityGroup/to BusObservatoryAPIContainerizedBusObservatoryAPIServiceSecurityGroup30728F3E:80"
+   }
+  },
+  "BusObservatoryAPIServiceLBPublicListenerB140CF5B": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "BusObservatoryAPIServiceLBPublicListenerECSGroup8C82DF50"
+      },
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "BusObservatoryAPIServiceLB6DDF7E2F"
+    },
+    "Port": 80,
+    "Protocol": "HTTP"
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/LB/PublicListener/Resource"
+   }
+  },
+  "BusObservatoryAPIServiceLBPublicListenerECSGroup8C82DF50": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "Port": 80,
+    "Protocol": "HTTP",
+    "TargetGroupAttributes": [
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "TargetType": "ip",
+    "VpcId": {
+     "Ref": "BusObservatoryAPIVPC3D167F78"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/LB/PublicListener/ECSGroup/Resource"
+   }
+  },
+  "BusObservatoryAPIServiceTaskDefTaskRole69AD8EA5": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonAthenaFullAccess"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/TaskDef/TaskRole/Resource"
+   }
+  },
+  "BusObservatoryAPIServiceTaskDefTaskRoleDefaultPolicy1A02BDB4": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:DescribeSecret"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:secretsmanager:us-east-1:870747888580:secret:auth0_api.busobservatory.org-Mx25l5"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "BusObservatoryAPIServiceTaskDefTaskRoleDefaultPolicy1A02BDB4",
+    "Roles": [
+     {
+      "Ref": "BusObservatoryAPIServiceTaskDefTaskRole69AD8EA5"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/TaskDef/TaskRole/DefaultPolicy/Resource"
+   }
+  },
+  "BusObservatoryAPIServiceTaskDefCF638862": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Essential": true,
+      "Image": {
+       "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:2463c263b802b0da4368c8f7d86cae53e3641844e0eeaf6ae84ac900be68dfc2"
+      },
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": {
+         "Ref": "BusObservatoryAPIServiceTaskDefwebLogGroup57AF2C94"
+        },
+        "awslogs-stream-prefix": "BusObservatoryAPI_Service",
+        "awslogs-region": {
+         "Ref": "AWS::Region"
+        }
+       }
+      },
+      "Name": "web",
+      "PortMappings": [
+       {
+        "ContainerPort": 80,
+        "Protocol": "tcp"
+       }
+      ]
+     }
+    ],
+    "Cpu": "256",
+    "ExecutionRoleArn": {
+     "Fn::GetAtt": [
+      "BusObservatoryAPIServiceTaskDefExecutionRole7D7F55E6",
+      "Arn"
+     ]
+    },
+    "Family": "BusObservatoryAPIContainerizedBusObservatoryAPIServiceTaskDef9793E1D1",
+    "Memory": "512",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "TaskRoleArn": {
+     "Fn::GetAtt": [
+      "BusObservatoryAPIServiceTaskDefTaskRole69AD8EA5",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/TaskDef/Resource"
+   }
+  },
+  "BusObservatoryAPIServiceTaskDefwebLogGroup57AF2C94": {
+   "Type": "AWS::Logs::LogGroup",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/TaskDef/web/LogGroup/Resource"
+   }
+  },
+  "BusObservatoryAPIServiceTaskDefExecutionRole7D7F55E6": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/TaskDef/ExecutionRole/Resource"
+   }
+  },
+  "BusObservatoryAPIServiceTaskDefExecutionRoleDefaultPolicy11E988F5": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ecr:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":repository/",
+          {
+           "Fn::Sub": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}"
+          }
+         ]
+        ]
+       }
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "BusObservatoryAPIServiceTaskDefwebLogGroup57AF2C94",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "BusObservatoryAPIServiceTaskDefExecutionRoleDefaultPolicy11E988F5",
+    "Roles": [
+     {
+      "Ref": "BusObservatoryAPIServiceTaskDefExecutionRole7D7F55E6"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/TaskDef/ExecutionRole/DefaultPolicy/Resource"
+   }
+  },
+  "BusObservatoryAPIService61E1E0B1": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": {
+     "Ref": "BusObservatoryAPIECSCluster93BB5A4E"
+    },
+    "DeploymentConfiguration": {
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 50
+    },
+    "DesiredCount": 2,
+    "EnableECSManagedTags": false,
+    "HealthCheckGracePeriodSeconds": 60,
+    "LaunchType": "FARGATE",
+    "LoadBalancers": [
+     {
+      "ContainerName": "web",
+      "ContainerPort": 80,
+      "TargetGroupArn": {
+       "Ref": "BusObservatoryAPIServiceLBPublicListenerECSGroup8C82DF50"
+      }
+     }
+    ],
+    "NetworkConfiguration": {
+     "AwsvpcConfiguration": {
+      "AssignPublicIp": "DISABLED",
+      "SecurityGroups": [
+       {
+        "Fn::GetAtt": [
+         "BusObservatoryAPIServiceSecurityGroupC867F678",
+         "GroupId"
+        ]
+       }
+      ],
+      "Subnets": [
+       {
+        "Ref": "BusObservatoryAPIVPCPrivateSubnet1Subnet52EDAB22"
+       },
+       {
+        "Ref": "BusObservatoryAPIVPCPrivateSubnet2Subnet28A53EEB"
+       }
+      ]
+     }
+    },
+    "TaskDefinition": {
+     "Ref": "BusObservatoryAPIServiceTaskDefCF638862"
+    }
+   },
+   "DependsOn": [
+    "BusObservatoryAPIServiceLBPublicListenerECSGroup8C82DF50",
+    "BusObservatoryAPIServiceLBPublicListenerB140CF5B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/Service/Service"
+   }
+  },
+  "BusObservatoryAPIServiceSecurityGroupC867F678": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/Service/SecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "BusObservatoryAPIVPC3D167F78"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/Service/SecurityGroup/Resource"
+   }
+  },
+  "BusObservatoryAPIServiceSecurityGroupfromBusObservatoryAPIContainerizedBusObservatoryAPIServiceLBSecurityGroupE4CE8C32804ED66462": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "FromPort": 80,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "BusObservatoryAPIServiceSecurityGroupC867F678",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "BusObservatoryAPIServiceLBSecurityGroupF44C2BE3",
+      "GroupId"
+     ]
+    },
+    "ToPort": 80
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/Service/SecurityGroup/from BusObservatoryAPIContainerizedBusObservatoryAPIServiceLBSecurityGroupE4CE8C32:80"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31S207DMAz9Ft6zcH/gcYyLJiGoOsTr5GammHVJlThDU9V/x01XVi7iKccnx7F9nDN9caVPjuAjTMxqPamo0M2CwayVUMsGzZluXmqjZq/2JZupLBYVmUUsLHLHHVDuIuMzFBUe+AM3DcEZAiZnv8QduJ1n3fEIfA+MH7BTmaetwMPDc8voBQ+CvpN9NGXp9W2DltUCTfTEu3vvYp16+Je4LT2G8Iue28S3Ck3QzayKQap3qgHegS+hmyqsb/CVLA0z/WScZSCLfsTtcxfot2R6n3qYyi1r4G7UoKd1LS4ntx4crK6hAmtw9SMdKwhMphJFkRRky62s6+/sNMS3eKwjmc3uNQMe3T9LZdnAYOQobBXBRje56/eezsxJXlpUj7rp/BJCQA76xpk1+vkGyu5TyIrlTudYu0Ds/O4aAqrKlWL+gyu/Kg64bVWOwUXf2/cUuY6s0kPya0txIHUxksgeVsn9VmU7fnP2+Fxf6dPLo/dANPHRMm1Q5/35CSIFUY8OAwAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "BusObservatoryAPI-Containerized/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "BusObservatoryAPIServiceLoadBalancerDNSA55AA1C9": {
+   "Value": {
+    "Fn::GetAtt": [
+     "BusObservatoryAPIServiceLB6DDF7E2F",
+     "DNSName"
+    ]
+   }
+  },
+  "BusObservatoryAPIServiceServiceURLFCAC3922": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "http://",
+      {
+       "Fn::GetAtt": [
+        "BusObservatoryAPIServiceLB6DDF7E2F",
+        "DNSName"
+       ]
+      }
+     ]
+    ]
+   }
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-2"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

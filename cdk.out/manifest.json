@@ -7,27 +7,27 @@
         "file": "tree.json"
       }
     },
-    "BusObservatoryAPI.assets": {
+    "BusObservatoryAPI-Containerized.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "BusObservatoryAPI.assets.json",
+        "file": "BusObservatoryAPI-Containerized.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "BusObservatoryAPI": {
+    "BusObservatoryAPI-Containerized": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://unknown-account/unknown-region",
       "properties": {
-        "templateFile": "BusObservatoryAPI.template.json",
+        "templateFile": "BusObservatoryAPI-Containerized.template.json",
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/166fb95a2ba7679c574135e91557ecc4e7ccda028bdcae3dbedb0ae184d44031.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1c53f840c1817af22eca97e2ffead9c901d219760cc00f89a9b0efd39b8f82aa.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "BusObservatoryAPI.assets"
+          "BusObservatoryAPI-Containerized.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
@@ -36,275 +36,275 @@
         }
       },
       "dependencies": [
-        "BusObservatoryAPI.assets"
+        "BusObservatoryAPI-Containerized.assets"
       ],
       "metadata": {
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/Resource": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPC3D167F78"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PublicSubnet1/Subnet": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1/Subnet": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPublicSubnet1Subnet8E6E2363"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PublicSubnet1/RouteTable": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1/RouteTable": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPublicSubnet1RouteTableE23147C2"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PublicSubnet1/RouteTableAssociation": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1/RouteTableAssociation": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPublicSubnet1RouteTableAssociationC2A76367"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PublicSubnet1/DefaultRoute": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1/DefaultRoute": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPublicSubnet1DefaultRoute66D24037"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PublicSubnet1/EIP": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1/EIP": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPublicSubnet1EIP2CDEEA9D"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PublicSubnet1/NATGateway": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet1/NATGateway": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPublicSubnet1NATGateway3BEA6517"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PublicSubnet2/Subnet": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2/Subnet": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPublicSubnet2SubnetBA406360"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PublicSubnet2/RouteTable": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2/RouteTable": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPublicSubnet2RouteTableE235A170"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PublicSubnet2/RouteTableAssociation": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2/RouteTableAssociation": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPublicSubnet2RouteTableAssociation0306698E"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PublicSubnet2/DefaultRoute": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2/DefaultRoute": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPublicSubnet2DefaultRouteF049AA08"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PublicSubnet2/EIP": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2/EIP": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPublicSubnet2EIPB21A3CB0"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PublicSubnet2/NATGateway": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PublicSubnet2/NATGateway": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPublicSubnet2NATGateway360D19E0"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PrivateSubnet1/Subnet": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet1/Subnet": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPrivateSubnet1Subnet52EDAB22"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PrivateSubnet1/RouteTable": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet1/RouteTable": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPrivateSubnet1RouteTableF477C9BC"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PrivateSubnet1/RouteTableAssociation": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet1/RouteTableAssociation": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPrivateSubnet1RouteTableAssociationF43E028C"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PrivateSubnet1/DefaultRoute": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet1/DefaultRoute": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPrivateSubnet1DefaultRoute84C8DB01"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PrivateSubnet2/Subnet": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet2/Subnet": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPrivateSubnet2Subnet28A53EEB"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PrivateSubnet2/RouteTable": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet2/RouteTable": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPrivateSubnet2RouteTableF9269DA0"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PrivateSubnet2/RouteTableAssociation": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet2/RouteTableAssociation": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPrivateSubnet2RouteTableAssociation37BA6977"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/PrivateSubnet2/DefaultRoute": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/PrivateSubnet2/DefaultRoute": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCPrivateSubnet2DefaultRouteFB628356"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/IGW": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/IGW": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCIGW47FA2419"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_VPC/VPCGW": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_VPC/VPCGW": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIVPCVPCGW56E84800"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_ECSCluster/Resource": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_ECSCluster/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIECSCluster93BB5A4E"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/LB/Resource": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/LB/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceLB6DDF7E2F"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/LB/SecurityGroup/Resource": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/LB/SecurityGroup/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceLBSecurityGroupF44C2BE3"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/LB/SecurityGroup/to BusObservatoryAPIBusObservatoryAPIServiceSecurityGroupF344C755:80": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/LB/SecurityGroup/to BusObservatoryAPIContainerizedBusObservatoryAPIServiceSecurityGroup30728F3E:80": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "BusObservatoryAPIServiceLBSecurityGrouptoBusObservatoryAPIBusObservatoryAPIServiceSecurityGroupF344C75580C1E308DE"
+            "data": "BusObservatoryAPIServiceLBSecurityGrouptoBusObservatoryAPIContainerizedBusObservatoryAPIServiceSecurityGroup30728F3E80AC9AFBC3"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/LB/PublicListener/Resource": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/LB/PublicListener/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceLBPublicListenerB140CF5B"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/LB/PublicListener/ECSGroup/Resource": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/LB/PublicListener/ECSGroup/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceLBPublicListenerECSGroup8C82DF50"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/LoadBalancerDNS": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/LoadBalancerDNS": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceLoadBalancerDNSA55AA1C9"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/ServiceURL": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/ServiceURL": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceServiceURLFCAC3922"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/TaskDef/TaskRole/Resource": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/TaskDef/TaskRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceTaskDefTaskRole69AD8EA5"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/TaskDef/TaskRole/DefaultPolicy/Resource": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/TaskDef/TaskRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceTaskDefTaskRoleDefaultPolicy1A02BDB4"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/TaskDef/Resource": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/TaskDef/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceTaskDefCF638862"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/TaskDef/web/LogGroup/Resource": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/TaskDef/web/LogGroup/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceTaskDefwebLogGroup57AF2C94"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/TaskDef/ExecutionRole/Resource": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/TaskDef/ExecutionRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceTaskDefExecutionRole7D7F55E6"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/TaskDef/ExecutionRole/DefaultPolicy/Resource": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/TaskDef/ExecutionRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceTaskDefExecutionRoleDefaultPolicy11E988F5"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/Service/Service": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/Service/Service": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIService61E1E0B1"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/Service/SecurityGroup/Resource": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/Service/SecurityGroup/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BusObservatoryAPIServiceSecurityGroupC867F678"
           }
         ],
-        "/BusObservatoryAPI/BusObservatoryAPI_Service/Service/SecurityGroup/from BusObservatoryAPIBusObservatoryAPIServiceLBSecurityGroupF9675410:80": [
+        "/BusObservatoryAPI-Containerized/BusObservatoryAPI_Service/Service/SecurityGroup/from BusObservatoryAPIContainerizedBusObservatoryAPIServiceLBSecurityGroupE4CE8C32:80": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "BusObservatoryAPIServiceSecurityGroupfromBusObservatoryAPIBusObservatoryAPIServiceLBSecurityGroupF96754108008C4AA8A"
+            "data": "BusObservatoryAPIServiceSecurityGroupfromBusObservatoryAPIContainerizedBusObservatoryAPIServiceLBSecurityGroupE4CE8C32804ED66462"
           }
         ],
-        "/BusObservatoryAPI/CDKMetadata/Default": [
+        "/BusObservatoryAPI-Containerized/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/BusObservatoryAPI/CDKMetadata/Condition": [
+        "/BusObservatoryAPI-Containerized/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/BusObservatoryAPI/BootstrapVersion": [
+        "/BusObservatoryAPI-Containerized/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/BusObservatoryAPI/CheckBootstrapVersion": [
+        "/BusObservatoryAPI-Containerized/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "BusObservatoryAPI"
+      "displayName": "BusObservatoryAPI-Containerized"
     }
   }
 }
