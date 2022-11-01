@@ -617,6 +617,18 @@
         ":iam::aws:policy/AmazonAthenaFullAccess"
        ]
       ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonS3FullAccess"
+       ]
+      ]
      }
     ]
    },
@@ -629,6 +641,56 @@
    "Properties": {
     "PolicyDocument": {
      "Statement": [
+      {
+       "Action": [
+        "s3:GetObject*",
+        "s3:GetBucket*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::busobservatory"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::busobservatory/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "s3:DeleteObject*",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":s3:::busobservatory/*"
+         ]
+        ]
+       }
+      },
       {
        "Action": [
         "secretsmanager:GetSecretValue",
@@ -658,7 +720,7 @@
      {
       "Essential": true,
       "Image": {
-       "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:2463c263b802b0da4368c8f7d86cae53e3641844e0eeaf6ae84ac900be68dfc2"
+       "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:8705fe56422a383f81b88a4e40271ca863ccf656195b6fef27762e26d971ed4b"
       },
       "LogConfiguration": {
        "LogDriver": "awslogs",
@@ -903,7 +965,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31S207DMAz9Ft6zcH/gcYyLJiGoOsTr5GammHVJlThDU9V/x01XVi7iKccnx7F9nDN9caVPjuAjTMxqPamo0M2CwayVUMsGzZluXmqjZq/2JZupLBYVmUUsLHLHHVDuIuMzFBUe+AM3DcEZAiZnv8QduJ1n3fEIfA+MH7BTmaetwMPDc8voBQ+CvpN9NGXp9W2DltUCTfTEu3vvYp16+Je4LT2G8Iue28S3Ck3QzayKQap3qgHegS+hmyqsb/CVLA0z/WScZSCLfsTtcxfot2R6n3qYyi1r4G7UoKd1LS4ntx4crK6hAmtw9SMdKwhMphJFkRRky62s6+/sNMS3eKwjmc3uNQMe3T9LZdnAYOQobBXBRje56/eezsxJXlpUj7rp/BJCQA76xpk1+vkGyu5TyIrlTudYu0Ds/O4aAqrKlWL+gyu/Kg64bVWOwUXf2/cUuY6s0kPya0txIHUxksgeVsn9VmU7fnP2+Fxf6dPLo/dANPHRMm1Q5/35CSIFUY8OAwAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31Sy27bMBD8ltxpNo/mkKPtpIGBoBHkIFdjRW+UrWVSIJcODEH/3iVlxWpa9MThcPY1y2v9/U5fXsBHmJntbtZQpbs1g9kpoTYdmmvdvbZGLd/sa7FURawaMutYWeTEnVHpIuMLVA2e+TM3D8EZAiZnP8UJPKyKdPwEfgTGDziqwtNB4DnxyjJ6waNg6OR0m7P0+r5Hy2qNJnri46N3sc09/Jd4qD2G8Be9spnvFZqgu2UTg1RPqhH+AF9Dmirs7vGNLI0zfWWcZSCLfsKdYtfoD2QGnwaYy21a4DRq0PO2FZezW08OtgtowBrcfgnHBgKTaURRZQXZ+iDr+nd0HuKP+1RHMps9aUY8eX+RyrKB0cjJtVcEe92Vbth7PgsncXlRA0rT+Q2EgBz0vTM79Ks91OlTyIrlTZfYukDs/HEBAVXjajH/ydWfFUfcq3CjF1FScFL2qsTgoh/MfI7cRlY5rfzhWvzIPU0kspVt3kWviiO/O/vtRt/pq9uLX4Fo5qNl2qMuh/M3v7JAlhwDAAA="
    },
    "Metadata": {
     "aws:cdk:path": "BusObservatoryAPI-Containerized/CDKMetadata/Default"

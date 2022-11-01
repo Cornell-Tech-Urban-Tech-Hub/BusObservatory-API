@@ -922,6 +922,18 @@
                                     ":iam::aws:policy/AmazonAthenaFullAccess"
                                   ]
                                 ]
+                              },
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/AmazonS3FullAccess"
+                                  ]
+                                ]
                               }
                             ]
                           }
@@ -943,6 +955,56 @@
                               "aws:cdk:cloudformation:props": {
                                 "policyDocument": {
                                   "Statement": [
+                                    {
+                                      "Action": [
+                                        "s3:GetObject*",
+                                        "s3:GetBucket*",
+                                        "s3:List*"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              "arn:",
+                                              {
+                                                "Ref": "AWS::Partition"
+                                              },
+                                              ":s3:::busobservatory"
+                                            ]
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              "arn:",
+                                              {
+                                                "Ref": "AWS::Partition"
+                                              },
+                                              ":s3:::busobservatory/*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "Action": "s3:DeleteObject*",
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:",
+                                            {
+                                              "Ref": "AWS::Partition"
+                                            },
+                                            ":s3:::busobservatory/*"
+                                          ]
+                                        ]
+                                      }
+                                    },
                                     {
                                       "Action": [
                                         "secretsmanager:GetSecretValue",
@@ -989,7 +1051,7 @@
                           {
                             "essential": true,
                             "image": {
-                              "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:2463c263b802b0da4368c8f7d86cae53e3641844e0eeaf6ae84ac900be68dfc2"
+                              "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:8705fe56422a383f81b88a4e40271ca863ccf656195b6fef27762e26d971ed4b"
                             },
                             "name": "web",
                             "portMappings": [
@@ -1353,6 +1415,14 @@
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_ecs_patterns.ApplicationLoadBalancedFargateService",
+              "version": "2.49.0"
+            }
+          },
+          "BusObservatoryBucket": {
+            "id": "BusObservatoryBucket",
+            "path": "BusObservatoryAPI-Containerized/BusObservatoryBucket",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3.BucketBase",
               "version": "2.49.0"
             }
           },

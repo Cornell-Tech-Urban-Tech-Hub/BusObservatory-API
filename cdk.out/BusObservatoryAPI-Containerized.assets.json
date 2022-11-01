@@ -1,7 +1,7 @@
 {
   "version": "21.0.0",
   "files": {
-    "1c53f840c1817af22eca97e2ffead9c901d219760cc00f89a9b0efd39b8f82aa": {
+    "6d62b3e2497fed622d16f80913e7916629fbb21a1d46ec9042a20376a1ac020c": {
       "source": {
         "path": "BusObservatoryAPI-Containerized.template.json",
         "packaging": "file"
@@ -9,21 +9,21 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "1c53f840c1817af22eca97e2ffead9c901d219760cc00f89a9b0efd39b8f82aa.json",
+          "objectKey": "6d62b3e2497fed622d16f80913e7916629fbb21a1d46ec9042a20376a1ac020c.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
     }
   },
   "dockerImages": {
-    "2463c263b802b0da4368c8f7d86cae53e3641844e0eeaf6ae84ac900be68dfc2": {
+    "8705fe56422a383f81b88a4e40271ca863ccf656195b6fef27762e26d971ed4b": {
       "source": {
-        "directory": "asset.2463c263b802b0da4368c8f7d86cae53e3641844e0eeaf6ae84ac900be68dfc2"
+        "directory": "asset.8705fe56422a383f81b88a4e40271ca863ccf656195b6fef27762e26d971ed4b"
       },
       "destinations": {
         "current_account-current_region": {
           "repositoryName": "cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}",
-          "imageTag": "2463c263b802b0da4368c8f7d86cae53e3641844e0eeaf6ae84ac900be68dfc2",
+          "imageTag": "8705fe56422a383f81b88a4e40271ca863ccf656195b6fef27762e26d971ed4b",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-image-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
