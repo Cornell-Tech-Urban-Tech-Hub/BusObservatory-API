@@ -1,5 +1,8 @@
 # BusObservatory-API
 
+# TODO
+1. the feed info pages are dying due to more than 30 seconds query time from Athena, and the API gateway times out (esp after a cold start, and probably because of lack of compaction)
+
 ### To test:
 ```
 do-local.sh
@@ -10,7 +13,7 @@ do-local.sh
 Takes about 2-3 minutes on M1 MacBook Air laptop.
 
 ```
-do-cloud.sh
+./do-cloud.sh
 ```
 
 ### To view logs:
